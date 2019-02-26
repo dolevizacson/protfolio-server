@@ -3,7 +3,7 @@ const content = require('../content/skillsPageContent');
 
 const router = express.Router();
 
-router.get('/skillsList', (req, res, next) => {
+router.get('/skillslist', (req, res, next) => {
   res.json(content.skills.skillsList);
 });
 

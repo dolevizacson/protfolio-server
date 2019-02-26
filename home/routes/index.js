@@ -11,7 +11,7 @@ router.get('/moto', (req, res, next) => {
   res.json(content.home.moto);
 });
 
-router.get('/warkingon', (req, res, next) => {
+router.get('/workingon', (req, res, next) => {
   res.json(content.home.workingOn);
 });
 module.exports = router;
