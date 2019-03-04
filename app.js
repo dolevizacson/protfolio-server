@@ -1,13 +1,14 @@
+global.__basedir = __dirname;
+
 const express = require('express');
 const path = require('path');
+require('./DB/mongo');
 
 const home = require('./home/routes');
 const skills = require('./skills/routes');
 const middleware = require('./middleware');
 
 const app = express();
-
-global.__basedir = __dirname;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
