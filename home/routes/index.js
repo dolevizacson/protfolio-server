@@ -1,17 +1,37 @@
 const express = require('express');
 const content = require('../content/homePageContent');
+const status = require('http-status-codes');
+const mongoose = require('mongoose');
+require('../models/contentModel');
+const Content = mongoose.model('content');
 
-const router = express.Router();
+const home = express.Router();
 
-router.get('/about', (req, res, next) => {
-  res.json(content.home.about);
+home.get('/about', async (req, res, next) => {
+  try {
+    const data = await Content.findOne({ name: 'about' });
+    if (data) {
+      res.json(data.content);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(status.BAD_REQUEST).end();
+  }
 });
 
-router.get('/moto', (req, res, next) => {
-  res.json(content.home.moto);
+home.get('/moto', async (req, res, next) => {
+  try {
+    const data = await Content.findOne({ name: 'moto' });
+    if (data) {
+      res.json(data.content);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(status.BAD_REQUEST).end();
+  }
 });
 
-router.get('/workingon', (req, res, next) => {
+home.get('/workingon', (req, res, next) => {
   res.json(content.home.workingOn);
 });
-module.exports = router;
+module.exports = home;
