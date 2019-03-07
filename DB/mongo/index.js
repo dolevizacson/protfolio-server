@@ -1,18 +1,9 @@
 const mongoose = require('mongoose');
 const confing = require(__basedir + '/config');
-const { Schema } = mongoose;
+require('./models');
+require('./initializeDB')();
 
 mongoose.connect(confing.mongoURI, { useNewUrlParser: true });
-
-const contentSchema = new Schema(
-  {
-    name: String,
-    content: String,
-  },
-  { collection: 'content' }
-);
-
-mongoose.model('data', contentSchema);
 
 // how to add collections
 /* const Content = mongoose.model('data');

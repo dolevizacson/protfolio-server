@@ -1,9 +1,12 @@
 const express = require('express');
-const content = require('../content/homePageContent');
 const status = require('http-status-codes');
 const mongoose = require('mongoose');
-require('../models/contentModel');
-const Content = mongoose.model('content');
+
+const content = require('../content/homePageContent');
+
+const models = require(__basedir + '/DB/mongo/models');
+const Content = mongoose.model(models.content);
+const WorkingOn = mongoose.model(models.workingOn);
 
 const home = express.Router();
 
@@ -31,7 +34,15 @@ home.get('/moto', async (req, res, next) => {
   }
 });
 
-home.get('/workingon', (req, res, next) => {
-  res.json(content.home.workingOn);
+home.get('/workingon', async (req, res, next) => {
+  try {
+    const data = await WorkingOn.find();
+    if (data) {
+      res.json(data);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(status.BAD_REQUEST).end();
+  }
 });
 module.exports = home;
