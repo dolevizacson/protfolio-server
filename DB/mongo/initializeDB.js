@@ -3,6 +3,7 @@ const models = require('./models');
 
 const Content = mongoose.model(models.content);
 const WorkingOn = mongoose.model(models.workingOn);
+const SkillsList = mongoose.model(models.skillsList);
 
 const about = {
   name: 'about',
@@ -30,6 +31,57 @@ const workingOn = [
   },
 ];
 
+const skillList = [
+  {
+    topic: 'Front-End',
+    image: '/frontendImage.png',
+    stack: [
+      {
+        language: 'JavaScript',
+        icon: 'js-square',
+        longData: [
+          'stuff about java script',
+          'more stuff about java script',
+          'more stuff about java script',
+        ],
+      },
+      {
+        language: 'React',
+        icon: 'react',
+        longData: [
+          'stuff about react',
+          'more stuff about react',
+          'more stuff about react',
+        ],
+      },
+    ],
+  },
+  {
+    topic: 'Back-End',
+    image: '/backendImage.png',
+    stack: [
+      {
+        language: 'Java',
+        icon: 'java',
+        longData: [
+          'stuff about java',
+          'more stuff about java',
+          'more stuff about java',
+        ],
+      },
+      {
+        language: 'node js',
+        icon: 'node',
+        longData: [
+          'stuff about node js',
+          'more stuff about node js',
+          'more stuff about node js',
+        ],
+      },
+    ],
+  },
+];
+
 module.exports = async () => {
   try {
     let data = await Content.findOne(about);
@@ -43,9 +95,16 @@ module.exports = async () => {
     }
 
     workingOn.map(async task => {
-      data = await WorkingOn.find(task);
-      if (data.length === 0) {
+      data = await WorkingOn.findOne(task);
+      if (!data) {
         new WorkingOn(task).save();
+      }
+    });
+
+    skillList.map(async skill => {
+      data = await SkillsList.findOne(skill);
+      if (!data) {
+        new SkillsList(skill).save();
       }
     });
   } catch (err) {

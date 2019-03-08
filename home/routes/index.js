@@ -2,7 +2,7 @@ const express = require('express');
 const status = require('http-status-codes');
 const mongoose = require('mongoose');
 
-const models = require(__basedir + '/DB/mongo/models');
+const models = require('../../DB/mongo/models');
 const Content = mongoose.model(models.content);
 const WorkingOn = mongoose.model(models.workingOn);
 
