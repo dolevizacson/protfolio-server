@@ -31,7 +31,7 @@ const workingOn = [
   },
 ];
 
-const skillList = [
+const skillsList = [
   {
     topic: 'Front-End',
     image: '/frontendImage.png',
@@ -101,8 +101,9 @@ module.exports = async () => {
       }
     });
 
-    skillList.map(async skill => {
+    skillsList.map(async skill => {
       data = await SkillsList.findOne(skill);
+      console.log(data);
       if (!data) {
         new SkillsList(skill).save();
       }

@@ -2,6 +2,6 @@ const mongoose = require('mongoose');
 
 const confing = require('../../config');
 require('./models');
-require('./initializeDB')();
+//require('./initializeDB')();
 
 mongoose.connect(confing.mongoURI, { useNewUrlParser: true });
