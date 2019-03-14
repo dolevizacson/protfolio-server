@@ -1,7 +1,9 @@
-const morgan = require('morgan');
-const path = require('path');
 const appRoot = require('app-root-path');
-const rfs = require('rotating-file-stream');
+const mods = require(`${appRoot}/env/modules/packages`);
+
+const morgan = mods.morgan;
+const path = mods.path;
+const rfs = mods.rfs;
 
 if (process.env.NODE_ENV === 'production') {
   try {

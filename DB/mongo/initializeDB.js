@@ -1,5 +1,12 @@
-const mongoose = require('mongoose');
-const models = require('./models');
+const appRoot = require('app-root-path');
+const mods = require(`${appRoot}/env/modules/packages`);
+const files = require(`${appRoot}/env/modules/files`);
+
+// modules
+const mongoose = mods.mongoose;
+
+//files
+const models = require(files.models);
 
 const Content = mongoose.model(models.content);
 const WorkingOn = mongoose.model(models.workingOn);

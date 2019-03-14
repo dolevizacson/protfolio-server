@@ -1,14 +1,21 @@
-const express = require('express');
-const path = require('path');
+const appRoot = require('app-root-path');
+const mods = require(`${appRoot}/env/modules/packages`);
+const files = require(`${appRoot}/env/modules/files`);
 
-const morgan = require('./loggers/morgan');
+// modules
+const express = mods.express;
+const path = mods.path;
+const status = mods.httpStatus;
 
-const mongo = require('./DB/mongo');
+// files
+const morgan = require(files.morgan);
+const mongo = require(files.mongo);
 
-const home = require('./home/routes');
-const skills = require('./skills/routes');
+const home = require(files.home);
+const skills = require(files.skills);
 
-const middleware = require('./middleware');
+const middleware = require(files.middleware);
+const errorHandlers = require(files.errorHandlers);
 
 const app = express();
 
@@ -22,10 +29,19 @@ app.use(mongo);
 app.use(morgan);
 app.use(middleware.checkCors());
 
+// routes
 app.use('/home', home);
 app.use('/skills', skills);
 
 // error handlers
-app.use(middleware.errorHandler);
+app.use(errorHandlers.errorHandler);
+
+app.get('*', (req, res, next) => {
+  // call winston
+  res
+    .status(status.NOT_FOUND)
+    .json({ error: 'Bad Endpoint' })
+    .end();
+});
 
 module.exports = app;

@@ -1,7 +1,14 @@
-const cors = require('cors');
-const config = require('../config');
+const appRoot = require('app-root-path');
+const mods = require(`${appRoot}/env/modules/packages`);
+const files = require(`${appRoot}/env/modules/files`);
 
-const middleware = {
+// modules
+const cors = mods.cors;
+
+// files
+const config = require(files.config);
+
+const middlewares = {
   checkCors(req, res, next) {
     const corsOptions = {
       origin(origin, callback) {
@@ -17,12 +24,6 @@ const middleware = {
     };
     return cors(corsOptions);
   },
-  errorHandler(err, req, res, next) {
-    console.log('in handler');
-    console.log(err.stack);
-    res.status('400').end();
-    //next(err);
-  },
 };
 
-module.exports = middleware;
+module.exports = middlewares;

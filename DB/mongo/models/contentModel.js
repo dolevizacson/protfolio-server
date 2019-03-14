@@ -1,4 +1,9 @@
-const mongoose = require('mongoose');
+const appRoot = require('app-root-path');
+const mods = require(`${appRoot}/env/modules/packages`);
+
+// modules
+const mongoose = mods.mongoose;
+
 const { Schema } = mongoose;
 
 const modelName = 'content';

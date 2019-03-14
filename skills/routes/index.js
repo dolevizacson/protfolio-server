@@ -1,24 +1,28 @@
-const express = require('express');
-const status = require('http-status-codes');
-const mongoose = require('mongoose');
+const appRoot = require('app-root-path');
+const mods = require(`${appRoot}/env/modules/packages`);
+const files = require(`${appRoot}/env/modules/files`);
+const helpers = require(`${appRoot}/env/functions/helpers`);
 
-const content = require('../content/skillsPageContent');
+// modules
+const express = mods.express;
+const status = mods.httpStatus;
+const mongoose = mods.mongoose;
 
-const models = require('../../DB/mongo/models');
+// files
+const models = require(files.models);
 const SkillsList = mongoose.model(models.skillsList);
-//const Content = mongoose.model(models.skillsList);
+
 const skills = express.Router();
 
-skills.get('/skillslist', async (req, res, next) => {
-  try {
+skills.get(
+  '/skillslist',
+  helpers.asyncWrapper(async (req, res, next) => {
     const data = await SkillsList.find();
     if (data) {
       res.json(data);
     }
-  } catch (err) {
-    console.log(err);
     res.status(status.BAD_REQUEST).end();
-  }
-});
+  })
+);
 
 module.exports = skills;
