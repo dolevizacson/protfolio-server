@@ -6,4 +6,6 @@ module.exports = {
   morgan: require('morgan'),
   path: require('path'),
   rfs: require('rotating-file-stream'),
+  winston: require('winston'),
+  wrfs: require('winston-daily-rotate-file'),
 };

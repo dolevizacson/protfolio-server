@@ -10,6 +10,7 @@ const status = mods.httpStatus;
 // files
 const morgan = require(files.morgan);
 const mongo = require(files.mongo);
+const winston = require(files.winston);
 
 const home = require(files.home);
 const skills = require(files.skills);
@@ -34,10 +35,9 @@ app.use('/home', home);
 app.use('/skills', skills);
 
 // error handlers
-app.use(errorHandlers.errorHandler);
+app.use(errorHandlers.finalErrorHandler);
 
 app.get('*', (req, res, next) => {
-  // call winston
   res
     .status(status.NOT_FOUND)
     .json({ error: 'Bad Endpoint' })

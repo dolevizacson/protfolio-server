@@ -17,6 +17,7 @@ const skills = express.Router();
 skills.get(
   '/skillslist',
   helpers.asyncWrapper(async (req, res, next) => {
+    throw new Error();
     const data = await SkillsList.find();
     if (data) {
       res.json(data);

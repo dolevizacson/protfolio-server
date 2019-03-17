@@ -9,4 +9,5 @@ module.exports = {
   mongo: `${appRoot}/DB/mongo`,
   morgan: `${appRoot}/loggers/morgan`,
   skills: `${appRoot}/skills/routes`,
+  winston: `${appRoot}/loggers/winston`,
 };
