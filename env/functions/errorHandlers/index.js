@@ -7,7 +7,7 @@ const winston = require(files.winston);
 
 const errorHandlers = {
   finalErrorHandler(err, req, res, next) {
-    winston.info(err);
+    winston.error(err);
     res.status('400').end();
     //next(err);
   },
