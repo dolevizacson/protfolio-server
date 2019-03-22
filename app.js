@@ -1,6 +1,7 @@
 const appRoot = require('app-root-path');
 const mods = require(`${appRoot}/env/modules/packages`);
 const files = require(`${appRoot}/env/modules/files`);
+const routes = require(`${appRoot}/env/routesConstants`);
 
 // modules
 const express = mods.express;
@@ -31,17 +32,11 @@ app.use(morgan);
 app.use(middleware.checkCors());
 
 // routes
-app.use('/home', home);
-app.use('/skills', skills);
+app.use(routes.home, home);
+app.use(routes.skills, skills);
 
 // error handlers
 app.use(errorHandlers.finalErrorHandler);
-
-app.get('*', (req, res, next) => {
-  res
-    .status(status.NOT_FOUND)
-    .json({ error: 'Bad Endpoint' })
-    .end();
-});
+app.get('*', errorHandlers.badRouteHandler);
 
 module.exports = app;

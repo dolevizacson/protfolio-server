@@ -2,6 +2,7 @@ const appRoot = require('app-root-path');
 const mods = require(`${appRoot}/env/modules/packages`);
 const files = require(`${appRoot}/env/modules/files`);
 const helpers = require(`${appRoot}/env/functions/helpers`);
+const routes = require(`${appRoot}/env/routesConstants`);
 
 // modules
 const express = mods.express;
@@ -15,13 +16,14 @@ const SkillsList = mongoose.model(models.skillsList);
 const skills = express.Router();
 
 skills.get(
-  '/skillslist',
+  routes.skillsList,
   helpers.asyncWrapper(async (req, res, next) => {
     const data = await SkillsList.find();
     if (data) {
       res.json(data);
+    } else {
+      res.status(status.BAD_REQUEST).end();
     }
-    res.status(status.BAD_REQUEST).end();
   })
 );
 

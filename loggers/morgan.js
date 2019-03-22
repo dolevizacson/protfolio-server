@@ -7,6 +7,12 @@ const path = mods.path;
 const rfs = mods.rfs;
 
 if (process.env.NODE_ENV === 'production') {
+  const options = {
+    skip: function(req, res) {
+      return res.statusCode < 400;
+    },
+  };
+
   try {
     const logStream = rfs(
       (time, index) => {
@@ -20,13 +26,11 @@ if (process.env.NODE_ENV === 'production') {
         path: path.join(appRoot.toString(), 'logs'),
       }
     );
-    module.exports = morgan('common', { stream: logStream });
+    module.exports = morgan('common', { ...options, stream: logStream });
   } catch (err) {
     console.log('No HTTP logs: ' + err);
     module.exports = morgan('dev', {
-      skip: function(req, res) {
-        return res.statusCode < 400;
-      },
+      ...options,
       stream: process.stderr,
     });
   }
