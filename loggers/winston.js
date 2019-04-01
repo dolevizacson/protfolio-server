@@ -6,14 +6,6 @@ const winston = mods.winston;
 const wrfs = winston.wrfs;
 const { combine, timestamp, splat, errors, colorize, printf } = winston.format;
 
-const file = new winston.transports.DailyRotateFile({
-  filename: 'errors-%DATE%.log',
-  dirname: `${appRoot}/logs`,
-  maxSize: '1m',
-});
-
-const console = new winston.transports.Console({});
-
 const printFunction = data => {
   return JSON.stringify(
     data,
@@ -44,6 +36,12 @@ let options = {
 };
 
 if (process.env.NODE_ENV === 'production') {
+  const file = new winston.transports.DailyRotateFile({
+    filename: 'errors-%DATE%.log',
+    dirname: `${appRoot}/logs`,
+    maxSize: '1m',
+  });
+
   options = {
     ...options,
     level: 'info',
@@ -51,6 +49,8 @@ if (process.env.NODE_ENV === 'production') {
     format: combine(...formatArgs),
   };
 } else {
+  const console = new winston.transports.Console({});
+
   options = {
     ...options,
     level: 'debug',

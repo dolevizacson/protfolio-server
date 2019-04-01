@@ -8,6 +8,7 @@ module.exports = {
   models: `${appRoot}/DB/mongo/models`,
   mongo: `${appRoot}/DB/mongo`,
   morgan: `${appRoot}/loggers/morgan`,
+  sessions: `${appRoot}/sessions`,
   skills: `${appRoot}/skills/routes`,
   winston: `${appRoot}/loggers/winston`,
 };

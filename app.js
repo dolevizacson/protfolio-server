@@ -1,3 +1,4 @@
+// initialization
 const appRoot = require('app-root-path');
 const mods = require(`${appRoot}/env/modules/packages`);
 const files = require(`${appRoot}/env/modules/files`);
@@ -9,8 +10,9 @@ const path = mods.path;
 const status = mods.httpStatus;
 
 // files
-const morgan = require(files.morgan);
 const mongo = require(files.mongo);
+const sessions = require(files.sessions);
+const morgan = require(files.morgan);
 const winston = require(files.winston);
 
 const home = require(files.home);
@@ -28,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // middleware
 app.use(mongo);
+app.use(sessions);
 app.use(morgan);
 app.use(middleware.checkCors());
 
