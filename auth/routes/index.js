@@ -14,20 +14,8 @@ const mongoose = mods.mongoose;
 const models = require(files.models);
 
 // models
-const SkillsList = mongoose.model(models.skillsList);
+const User = mongoose.model(models.user);
 
-const skills = express.Router();
+const auth = express.Router();
 
-skills.get(
-  routes.skillsList,
-  helpers.asyncWrapper(async (req, res, next) => {
-    const data = await SkillsList.find();
-    if (data) {
-      res.json(data);
-    } else {
-      res.status(status.BAD_REQUEST).end();
-    }
-  })
-);
-
-module.exports = skills;
+module.exports = auth;

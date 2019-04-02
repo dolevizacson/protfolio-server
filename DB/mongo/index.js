@@ -11,9 +11,7 @@ const confing = require(files.config);
 require(files.models);
 //files.initializeDB();
 
-module.exports = async (req, res, next) => {
-  helpers.asyncWrapper(async () => {
-    await mongoose.connect(confing.mongoURI, { useNewUrlParser: true });
-  })();
+module.exports = helpers.asyncWrapper(async (req, res, next) => {
+  await mongoose.connect(confing.mongoURI, { useNewUrlParser: true });
   next();
-};
+});

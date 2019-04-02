@@ -2,6 +2,7 @@
 const appRoot = require('app-root-path');
 const mods = require(`${appRoot}/env/modules/packages`);
 const files = require(`${appRoot}/env/modules/files`);
+const helpers = require(`${appRoot}/env/functions/helpers`);
 const routes = require(`${appRoot}/env/routesConstants`);
 
 // modules
@@ -14,6 +15,7 @@ const mongo = require(files.mongo);
 const sessions = require(files.sessions);
 const morgan = require(files.morgan);
 const winston = require(files.winston);
+const passport = require(files.passport);
 
 const home = require(files.home);
 const skills = require(files.skills);
@@ -31,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // middleware
 app.use(mongo);
 app.use(sessions);
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(morgan);
 app.use(middleware.checkCors());
 

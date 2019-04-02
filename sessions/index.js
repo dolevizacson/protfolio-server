@@ -2,8 +2,9 @@
 const appRoot = require('app-root-path');
 const mods = require(`${appRoot}/env/modules/packages`);
 const files = require(`${appRoot}/env/modules/files`);
+const helpers = require(`${appRoot}/env/functions/helpers`);
 
-// mods
+// modules
 const sessions = mods.sessions;
 const mongoStore = mods.mongoStore(sessions);
 const mongoose = mods.mongoose;
