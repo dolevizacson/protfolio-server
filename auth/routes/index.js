@@ -9,13 +9,34 @@ const routes = require(`${appRoot}/env/routesConstants`);
 const express = mods.express;
 const status = mods.httpStatus;
 const mongoose = mods.mongoose;
+const passport = mods.passport;
 
 // files
 const models = require(files.models);
+const config = require(files.config);
 
 // models
 const User = mongoose.model(models.user);
 
 const auth = express.Router();
+
+auth.get(
+  routes.register,
+  helpers.asyncWrapper(async (req, res, next) => {
+    user = await User.register(
+      { username: config.auth.username },
+      config.auth.password
+    );
+    res.json(user);
+  })
+);
+
+auth.post(
+  routes.login,
+  passport.authenticate('local'),
+  helpers.asyncWrapper(async (req, res, next) => {
+    res.status(status.OK).end();
+  })
+);
 
 module.exports = auth;

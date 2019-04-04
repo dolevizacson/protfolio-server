@@ -8,4 +8,9 @@ module.exports = {
   // skills
   skills: '/skills',
   skillsList: '/skillslist',
+
+  // auth
+  auth: '/auth',
+  login: '/login',
+  register: '/register',
 };

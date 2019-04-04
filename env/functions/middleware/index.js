@@ -4,6 +4,8 @@ const files = require(`${appRoot}/env/modules/files`);
 
 // modules
 const cors = mods.cors;
+const passport = mods.passport;
+const status = mods.httpStatus;
 
 // files
 const config = require(files.config);
@@ -23,6 +25,13 @@ const middlewares = {
       },
     };
     return cors(corsOptions);
+  },
+  isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+      return next();
+    } else {
+      res.status(status.UNAUTHORIZED).end();
+    }
   },
 };
 

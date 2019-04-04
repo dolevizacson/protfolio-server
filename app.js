@@ -19,9 +19,10 @@ const passport = require(files.passport);
 
 const home = require(files.home);
 const skills = require(files.skills);
+const auth = require(files.auth);
 
-const middleware = require(files.middleware);
 const errorHandlers = require(files.errorHandlers);
+const middleware = require(files.middleware);
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use(morgan);
 app.use(middleware.checkCors());
 
 // routes
+app.use(routes.auth, auth);
 app.use(routes.home, home);
 app.use(routes.skills, skills);
 
