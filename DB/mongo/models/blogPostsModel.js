@@ -9,15 +9,22 @@ const mongoose = mods.mongoose;
 
 const { Schema } = mongoose;
 
-const modelName = 'workingOn';
+const modelName = 'blogPosts';
 
 mongoose.model(
   modelName,
   new Schema(
     {
+      active: { type: Boolean, default: true },
       header: String,
-      description: String,
-      isDone: Boolean,
+      paragraph: [
+        {
+          header: String,
+          content: String,
+          //image
+        },
+      ],
+      footer: String,
     },
     { collection: modelName }
   )

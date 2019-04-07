@@ -14,6 +14,7 @@ const passport = mods.passport;
 // files
 const models = require(files.models);
 const config = require(files.config);
+const middleware = require(files.middleware);
 
 // models
 const User = mongoose.model(models.user);
@@ -38,5 +39,23 @@ auth.post(
     res.status(status.OK).end();
   })
 );
+
+auth.get(
+  routes.logout,
+  helpers.asyncWrapper(async (req, res, next) => {
+    req.logout();
+    req.session.destroy();
+    res.status(status.OK).end();
+  })
+);
+
+// remove later
+/* auth.get(
+  '/test',
+  middleware.isLoggedIn,
+  helpers.asyncWrapper(async (req, res, next) => {
+    res.send('looged in');
+  })
+); */
 
 module.exports = auth;

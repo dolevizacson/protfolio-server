@@ -15,8 +15,9 @@ module.exports = {
   auth: `${appRoot}/auth/routes`,
   home: `${appRoot}/home/routes`,
   skills: `${appRoot}/skills/routes`,
-  //models
 
+  //models
+  blogPosts: `${appRoot}/DB/mongo/models/blogPostsModel`,
   content: `${appRoot}/DB/mongo/models/contentModel`,
   skillsList: `${appRoot}/DB/mongo/models/skillsListModel`,
   user: `${appRoot}/DB/mongo/models/userModel`,

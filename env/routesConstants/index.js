@@ -11,6 +11,7 @@ module.exports = {
 
   // auth
   auth: '/auth',
+  logout: '/logout',
   login: '/login',
   register: '/register',
 };
