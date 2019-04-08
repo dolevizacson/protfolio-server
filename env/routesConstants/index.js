@@ -14,4 +14,8 @@ module.exports = {
   logout: '/logout',
   login: '/login',
   register: '/register',
+
+  // blog
+  posts: '/posts',
+  readBlogPost: '/post/:id',
 };

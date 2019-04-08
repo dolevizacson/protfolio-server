@@ -12,16 +12,17 @@ const mongoose = mods.mongoose;
 
 // files
 const models = require(files.models);
+const middleware = require(files.middleware);
 
 // models
-const SkillsList = mongoose.model(models.skillsList);
+const BlogPost = mongoose.model(models.blogPost);
 
-const skills = express.Router();
+const blog = express.Router();
 
-skills.get(
-  routes.skillsList,
+blog.get(
+  routes.posts,
   helpers.asyncWrapper(async (req, res, next) => {
-    const data = await SkillsList.find();
+    const data = await BlogPost.find({ active: true });
     if (data) {
       res.json(data);
     } else {
@@ -30,4 +31,20 @@ skills.get(
   })
 );
 
-module.exports = skills;
+blog.get(
+  routes.readBlogPost,
+  helpers.asyncWrapper(async (req, res, next) => {
+    if (!req.body.id) {
+      res.status(status.BAD_REQUEST).end();
+    } else {
+      const data = await BlogPost.findOne({ active: true });
+      if (data) {
+        res.json(data);
+      } else {
+        res.status(status.NOT_FOUND).end();
+      }
+    }
+  })
+);
+
+module.exports = blog;

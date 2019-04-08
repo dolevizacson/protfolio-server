@@ -25,7 +25,7 @@ home.get(
     if (data) {
       res.json(data.content);
     } else {
-      res.status(status.BAD_REQUEST).end();
+      res.status(status.NOT_FOUND).end();
     }
   })
 );
@@ -37,7 +37,7 @@ home.get(
     if (data) {
       res.json(data.content);
     } else {
-      res.status(status.BAD_REQUEST).end();
+      res.status(status.NOT_FOUND).end();
     }
   })
 );
@@ -49,7 +49,7 @@ home.get(
     if (data) {
       res.json(data);
     } else {
-      res.status(status.BAD_REQUEST).end();
+      res.status(status.NOT_FOUND).end();
     }
   })
 );

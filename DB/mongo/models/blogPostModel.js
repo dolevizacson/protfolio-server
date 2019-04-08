@@ -9,7 +9,7 @@ const mongoose = mods.mongoose;
 
 const { Schema } = mongoose;
 
-const modelName = 'blogPosts';
+const modelName = 'blogPost';
 
 mongoose.model(
   modelName,

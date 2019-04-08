@@ -17,7 +17,7 @@ module.exports = {
   skills: `${appRoot}/skills/routes`,
 
   //models
-  blogPosts: `${appRoot}/DB/mongo/models/blogPostsModel`,
+  blogPost: `${appRoot}/DB/mongo/models/blogPostModel`,
   content: `${appRoot}/DB/mongo/models/contentModel`,
   skillsList: `${appRoot}/DB/mongo/models/skillsListModel`,
   user: `${appRoot}/DB/mongo/models/userModel`,
