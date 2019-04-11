@@ -12,6 +12,10 @@ require(files.models);
 //files.initializeDB();
 
 module.exports = helpers.asyncWrapper(async (req, res, next) => {
-  await mongoose.connect(confing.mongoURI, { useNewUrlParser: true });
+  await mongoose.connect(confing.mongoURI, {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  });
   next();
 });

@@ -16,6 +16,10 @@ module.exports = {
   register: '/register',
 
   // blog
-  posts: '/posts',
-  readBlogPost: '/post/:id',
+  blog: '/blog',
+  readBlogPosts: '/posts', // get
+  readBlogPost: '/posts/:id', // get
+  createBlogPost: '/posts', // post
+  updateBlogPost: '/posts/:id', // put
+  deleteBlogPost: '/posts/:id', // delete
 };

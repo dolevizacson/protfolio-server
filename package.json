@@ -7,14 +7,14 @@
     "start-prod": "cross-env NODE_ENV=production node ./bin/www"
   },
   "dependencies": {
-    "app-root-path": "^2.1.0",
+    "app-root-path": "^2.2.1",
     "connect-mongo": "^2.0.3",
     "cors": "^2.8.5",
     "cross-env": "^5.2.0",
     "express": "~4.16.0",
-    "express-session": "^1.15.6",
-    "http-status-codes": "^1.3.1",
-    "mongoose": "^5.4.17",
+    "express-session": "^1.16.1",
+    "http-status-codes": "^1.3.2",
+    "mongoose": "^5.5.1",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
@@ -24,6 +24,6 @@
     "winston-daily-rotate-file": "^3.8.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.11"
   }
 }

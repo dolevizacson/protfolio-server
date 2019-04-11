@@ -17,6 +17,7 @@ mongoose.model(
     {
       active: { type: Boolean, default: true },
       header: String,
+      date: { type: Date, default: Date.now() },
       paragraph: [
         {
           header: String,
