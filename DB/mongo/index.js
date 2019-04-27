@@ -7,12 +7,11 @@ const helpers = require(`${appRoot}/env/functions/helpers`);
 const mongoose = mods.mongoose;
 
 // files
-const confing = require(files.config);
 require(files.models);
 //files.initializeDB();
 
 module.exports = helpers.asyncWrapper(async (req, res, next) => {
-  await mongoose.connect(confing.mongoURI, {
+  await mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useFindAndModify: false,
     useCreateIndex: true,

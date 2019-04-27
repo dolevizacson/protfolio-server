@@ -1,7 +1,6 @@
 const appRoot = require('app-root-path');
 
 module.exports = {
-  config: `${appRoot}/config`,
   errorHandlers: `${appRoot}/env/functions/errorHandlers`,
   middleware: `${appRoot}/env/functions/middleware`,
   models: `${appRoot}/DB/mongo/models`,
@@ -16,6 +15,10 @@ module.exports = {
   home: `${appRoot}/home/routes`,
   skills: `${appRoot}/skills/routes`,
   blog: `${appRoot}/blog/routes`,
+
+  //blog
+  //blogController: `${appRoot}/blog/controller/blogController`,
+  blogService: `${appRoot}/blog/services/blogService`,
 
   //models
   blogPost: `${appRoot}/DB/mongo/models/blogPostModel`,

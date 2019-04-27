@@ -1,6 +1,7 @@
 module.exports = {
   mongoStore: require('connect-mongo'),
   cors: require('cors'),
+  dotenv: require('dotenv'),
   express: require('express'),
   sessions: require('express-session'),
   httpStatus: require('http-status-codes'),

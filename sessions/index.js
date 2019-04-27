@@ -9,13 +9,10 @@ const sessions = mods.sessions;
 const mongoStore = mods.mongoStore(sessions);
 const mongoose = mods.mongoose;
 
-// files
-const config = require(files.config);
-
 const optios = {
   saveUninitialized: true,
   resave: false,
-  secret: config.sessionsSecret,
+  secret: process.env.SESSIONS_SECRET,
   cookie: {
     httpOnly: true,
     maxAge: 604800000, // 7 days

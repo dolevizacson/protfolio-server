@@ -13,7 +13,6 @@ const passport = mods.passport;
 
 // files
 const models = require(files.models);
-const config = require(files.config);
 const middleware = require(files.middleware);
 
 // models
@@ -25,8 +24,8 @@ auth.get(
   routes.register,
   helpers.asyncWrapper(async (req, res, next) => {
     user = await User.register(
-      { username: config.auth.username },
-      config.auth.password
+      { username: process.env.AUTH_USERNAME },
+      process.env.AUTH_PASSWORD
     );
     res.json(user);
   })

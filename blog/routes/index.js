@@ -12,12 +12,20 @@ const mongoose = mods.mongoose;
 
 // files
 const models = require(files.models);
-const middleware = require(files.middleware);
 
 // models
 const BlogPost = mongoose.model(models.blogPost);
 
 const blog = express.Router();
+
+// move to auth service
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    res.status(status.UNAUTHORIZED).end();
+  }
+}
 
 blog.get(
   routes.readBlogPosts,
@@ -33,7 +41,7 @@ blog.get(
 
 blog.post(
   routes.createBlogPost,
-  middleware.isLoggedIn,
+  isLoggedIn,
   helpers.asyncWrapper(async (req, res, next) => {
     const blogPost = await BlogPost.create(req.body);
     if (blogPost) {
@@ -58,7 +66,7 @@ blog.get(
 
 blog.put(
   routes.readBlogPost,
-  middleware.isLoggedIn,
+  isLoggedIn,
   helpers.asyncWrapper(async (req, res, next) => {
     const data = await BlogPost.findByIdAndUpdate(req.params.id, req.body);
     if (data) {
@@ -71,7 +79,7 @@ blog.put(
 
 blog.delete(
   routes.readBlogPost,
-  middleware.isLoggedIn,
+  isLoggedIn,
   helpers.asyncWrapper(async (req, res, next) => {
     const data = await BlogPost.findByIdAndUpdate(req.params.id, {
       active: false,
