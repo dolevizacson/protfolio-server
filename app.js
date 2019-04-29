@@ -1,35 +1,42 @@
 // initialization
 const appRoot = require('app-root-path');
-const modules = require(`${appRoot}/env/modules/packages`);
-const files = require(`${appRoot}/env/modules/files`);
+const modules = require(`${appRoot}/env/dependencies/app-dependencies`);
+const files = require(`${appRoot}/env/constants/files-paths`);
 const helpers = require(`${appRoot}/env/functions/helpers`);
-const routes = require(`${appRoot}/env/routesConstants`);
+const routes = require(`${appRoot}/env/constants/routes`);
 
 // modules
-const express = modules.express;
-modules.dotenv.config();
+const express = modules.EXPRESS;
+modules.DOTENV.config();
+
+// files
+const mongoInit = require(files.MONGO);
+
+// db connections
+mongoInit();
 
 // controllers
-const home = require(files.home);
-const skills = require(files.skills);
-const auth = require(files.auth);
-const blog = require(files.blog);
+const home = require(files.HOME);
+const skills = require(files.SKILLS);
+const auth = require(files.AUTH);
+const blog = require(files.BLOG);
 
-const errorHandlers = require(files.errorHandlers);
-const addMiddleware = require(files.middleware);
+const addErrorHandlers = require(files.ERROR_HANDLERS);
+const addMiddleware = require(files.MIDDLEWARE);
 
 const app = express();
 
 addMiddleware(app);
 
 // routes
-app.use(routes.auth, auth);
-app.use(routes.home, home);
-app.use(routes.skills, skills);
-app.use(routes.blog, blog);
+app.use(routes.AUTH, auth);
+app.use(routes.HOME, home);
+app.use(routes.SKILLS, skills);
+app.use(routes.BLOG, blog);
 
-// error handlers
-app.use(errorHandlers.finalErrorHandler);
-app.get('*', errorHandlers.badRouteHandler);
+// default route handler
+app.get('*', (req, res, next) => {
+  next(new BadEndpointError('No such route available'));
+});
 
 module.exports = app;

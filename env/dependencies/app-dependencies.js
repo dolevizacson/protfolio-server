@@ -1,0 +1,17 @@
+module.exports = {
+  MONGO_STORE: require('connect-mongo'),
+  CORS: require('cors'),
+  DOTENV: require('dotenv'),
+  EXPRESS: require('express'),
+  SESSIONS: require('express-session'),
+  HTTP_STATUS: require('http-status-codes'),
+  MONGOOSE: require('mongoose'),
+  MORGAN: require('morgan'),
+  PASSPORT: require('passport'),
+  LOCAL_STRATEGY: require('passport-local'),
+  PASSPORT_LOCAL_MONGOOSE: require('passport-local-mongoose'),
+  PATH: require('path'),
+  RFS: require('rotating-file-stream'),
+  WINSTON: require('winston'),
+  WRFS: require('winston-daily-rotate-file'),
+};
