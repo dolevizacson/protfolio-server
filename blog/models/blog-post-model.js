@@ -1,14 +1,20 @@
 // initialization
 const appRoot = require('app-root-path');
-const modules = require(`${appRoot}/env/modules/packages`);
-const files = require(`${appRoot}/env/modules/files`);
+const modules = require(`${appRoot}/env/dependencies/app-dependencies`);
+const files = require(`${appRoot}/env/constants/files-paths`);
 
 // modules
-const mongoose = modules.mongoose;
+const mongoose = modules.MONGOOSE;
 
 const { Schema } = mongoose;
 
 const modelName = 'blogPost';
+
+const paragraphSchema = new Schema({
+  header: String,
+  content: String,
+  //image
+});
 
 const blogPostSchema = new Schema(
   {
@@ -20,12 +26,6 @@ const blogPostSchema = new Schema(
   },
   { collection: modelName }
 );
-
-const paragraphSchema = new Schema({
-  header: String,
-  content: String,
-  //image
-});
 
 mongoose.model(modelName, blogPostSchema);
 

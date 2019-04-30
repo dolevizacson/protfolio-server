@@ -6,7 +6,7 @@ const helpers = require(`${appRoot}/env/functions/helpers`);
 const routes = require(`${appRoot}/env/constants/routes`);
 
 // modules
-const express = modules.EXSPRESS;
+const express = modules.EXPRESS;
 
 // services
 const SkillsContentService = require(files.SKILLS_CONTENT_SERVICE);

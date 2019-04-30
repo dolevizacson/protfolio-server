@@ -6,12 +6,13 @@ module.exports = {
   MIDDLEWARE: `${appRoot}/env/middleware`,
   MONGO: `${appRoot}/env/DB/mongo/connection-settings`,
   MORGAN: `${appRoot}/env/loggers/morgan`,
-  PASSPORT: `${appRoot}/auth`, // dont know yet
   SESSIONS: `${appRoot}/env/sessions/sessions-settings`,
   WINSTON: `${appRoot}/env/loggers/winston`,
 
   // auth
   AUTH: `${appRoot}/auth/controllers/auth-controller`,
+  AUTH_SERVICE: `${appRoot}/auth/services/auth-service`,
+  USER_MODEL: `${appRoot}/auth/models/user-model`,
 
   // home
   HOME: `${appRoot}/home/controllers/home-controller`,

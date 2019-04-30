@@ -15,13 +15,13 @@ const HomeWorkingOnModel = mongoose.model(homeWorkingOnModel);
 
 module.exports = class HomeContentService {
   async readOne(name) {
-    const content = await HomeContentModel.findOne({ name });
-    if (!content) {
+    const contentObject = await HomeContentModel.findOne({ name });
+    if (!contentObject) {
       throw new NotFoundInDatabaseError(
         `${name} content not found in database`
       );
     } else {
-      return content;
+      return contentObject.content;
     }
   }
 

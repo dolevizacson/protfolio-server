@@ -1,14 +1,24 @@
 // initialization
 const appRoot = require('app-root-path');
-const modules = require(`${appRoot}/env/modules/packages`);
-const files = require(`${appRoot}/env/modules/files`);
+const modules = require(`${appRoot}/env/dependencies/app-dependencies`);
+const files = require(`${appRoot}/env/constants/files-paths`);
 
 // modules
-const mongoose = modules.mongoose;
+const mongoose = modules.MONGOOSE;
 
 const { Schema } = mongoose;
 
 const modelName = 'skillsList';
+
+const stackSchema = new Schema({
+  language: String,
+  icon: String,
+  longData: [
+    {
+      type: String,
+    },
+  ],
+});
 
 const skillsListSchema = new Schema(
   {
@@ -22,20 +32,6 @@ const skillsListSchema = new Schema(
   },
   { collection: modelName }
 );
-
-stackSchema = new Schema({
-  language: String,
-  icon: String,
-  longData: [
-    {
-      type: longDataSchema,
-    },
-  ],
-});
-
-longDataSchema = new Schema({
-  type: String,
-});
 
 mongoose.model(modelName, skillsListSchema);
 

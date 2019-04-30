@@ -9,7 +9,7 @@ const routes = require(`${appRoot}/env/constants/routes`);
 const express = modules.EXPRESS;
 
 // services
-const BlogPostService = files.BLOG_POST_SERVICE;
+const BlogPostService = require(files.BLOG_POST_SERVICE);
 const blogPostService = new BlogPostService();
 
 const blogController = express.Router();

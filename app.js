@@ -21,7 +21,7 @@ const skills = require(files.SKILLS);
 const auth = require(files.AUTH);
 const blog = require(files.BLOG);
 
-const addErrorHandlers = require(files.ERROR_HANDLERS);
+//const addErrorHandlers = require(files.ERROR_HANDLERS);
 const addMiddleware = require(files.MIDDLEWARE);
 
 const app = express();

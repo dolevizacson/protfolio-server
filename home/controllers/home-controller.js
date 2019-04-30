@@ -9,7 +9,7 @@ const routes = require(`${appRoot}/env/constants/routes`);
 const express = modules.EXPRESS;
 
 // services
-const HomeContentService = files.HOME_CONTENT_SERVICE;
+const HomeContentService = require(files.HOME_CONTENT_SERVICE);
 const homeContentService = new HomeContentService();
 
 const homeController = express.Router();
@@ -34,9 +34,9 @@ homeController.get(
 homeController.get(
   routes.READ_HOME_WORKING_ON,
   helpers.asyncWrapper(async (req, res, next) => {
-    const workingOn = await homeContentService.readall();
+    const workingOn = await homeContentService.readAll();
     res.send(workingOn);
   })
 );
 
-module.exports = homeContentService;
+module.exports = homeController;

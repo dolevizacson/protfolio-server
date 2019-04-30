@@ -6,11 +6,11 @@ const files = require(`${appRoot}/env/constants/files-paths`);
 // modules
 const express = modules.EXPRESS;
 const cors = modules.CORS;
+const passport = modules.PASSPORT;
 
 //files
 const sessions = require(files.SESSIONS);
 const morgan = require(files.MORGAN);
-const passport = require(files.PASSPORT);
 
 module.exports = function appMiddleware(app) {
   // express middleware
