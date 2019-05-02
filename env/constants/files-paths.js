@@ -2,12 +2,18 @@ const appRoot = require('app-root-path');
 
 module.exports = {
   APP_MIDDLEWARE: `${appRoot}/env/middleware/app-middleware`,
-  ERROR_HANDLERS: `${appRoot}/env/error-handlers`, // no files yet
-  MIDDLEWARE: `${appRoot}/env/middleware`,
+  ERRORS: `${appRoot}/env/errors/errors`,
+  ERROR_HANDLERS: `${appRoot}/env/error-handlers/error-handlers`,
+  GENERAL_ERROR_HANDLERS: `${appRoot}/env/error-handlers/general-error-handlers`,
+  SPECIFIC_ERROR_HANDLERS: `${appRoot}/env/error-handlers/specific-error-handlers`,
+  MIDDLEWARE: `${appRoot}/env/middleware/middleware`,
   MONGO: `${appRoot}/env/DB/mongo/connection-settings`,
   MORGAN: `${appRoot}/env/loggers/morgan`,
   SESSIONS: `${appRoot}/env/sessions/sessions-settings`,
   WINSTON: `${appRoot}/env/loggers/winston`,
+
+  // errors
+  NOT_FOUND_IN_DATABASE_ERROR: `${appRoot}/env/errors/not-found-in-database-error`,
 
   // auth
   AUTH: `${appRoot}/auth/controllers/auth-controller`,

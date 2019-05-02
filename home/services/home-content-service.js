@@ -10,6 +10,9 @@ const mongoose = modules.MONGOOSE;
 const homeContentModel = require(files.HOME_CONTENT_MODEL);
 const homeWorkingOnModel = require(files.HOME_WORKING_ON_MODEL);
 
+// errors
+const NotFoundInDatabaseError = require(files.NOT_FOUND_IN_DATABASE_ERROR);
+
 const HomeContentModel = mongoose.model(homeContentModel);
 const HomeWorkingOnModel = mongoose.model(homeWorkingOnModel);
 

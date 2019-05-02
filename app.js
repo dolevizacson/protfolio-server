@@ -21,7 +21,7 @@ const skills = require(files.SKILLS);
 const auth = require(files.AUTH);
 const blog = require(files.BLOG);
 
-//const addErrorHandlers = require(files.ERROR_HANDLERS);
+const addErrorHandlers = require(files.ERROR_HANDLERS);
 const addMiddleware = require(files.MIDDLEWARE);
 
 const app = express();
@@ -33,6 +33,8 @@ app.use(routes.AUTH, auth);
 app.use(routes.HOME, home);
 app.use(routes.SKILLS, skills);
 app.use(routes.BLOG, blog);
+
+addErrorHandlers(app);
 
 // default route handler
 app.get('*', (req, res, next) => {

@@ -1,16 +1,20 @@
+// initialization
 const appRoot = require('app-root-path');
-const mods = require(`${appRoot}/env/modules/packages`);
-const files = require(`${appRoot}/env/modules/files`);
+const modules = require(`${appRoot}/env/dependencies/app-dependencies`);
+const files = require(`${appRoot}/env/constants/files-paths`);
+const helpers = require(`${appRoot}/env/functions/helpers`);
 
 // modules
-const mongoose = mods.mongoose;
+const mongoose = modules.MONGOOSE;
 
 //files
-const models = require(files.models);
+const homeContentModel = require(files.HOME_CONTENT_MODEL);
+const homeWorkingOnModel = require(files.HOME_WORKING_ON_MODEL);
+const skillsListModel = require(files.SKILLS_LIST_MODEL);
 
-const Content = mongoose.model(models.content);
-const WorkingOn = mongoose.model(models.workingOn);
-const SkillsList = mongoose.model(models.skillsList);
+const HomeContentModel = mongoose.model(models.homeContentModel);
+const HomeWorkingOnModel = mongoose.model(models.homeWorkingOnModel);
+const SkillsListModel = mongoose.model(models.skillsListModel);
 
 const about = {
   name: 'about',
@@ -91,25 +95,25 @@ const skillsList = [
 
 module.exports = async () => {
   try {
-    let data = await Content.findOne(about);
+    let data = await HomeContentModel.findOne(about);
     if (!data) {
       new Content(about).save();
     }
 
-    data = await Content.findOne(moto);
+    data = await HomeContentModel.findOne(moto);
     if (!data) {
       new Content(moto).save();
     }
 
     workingOn.map(async task => {
-      data = await WorkingOn.findOne(task);
+      data = await HomeWorkingOnModel.findOne(task);
       if (!data) {
         new WorkingOn(task).save();
       }
     });
 
     skillsList.map(async skill => {
-      data = await SkillsList.findOne(skill);
+      data = await SkillsListModel.findOne(skill);
       console.log(data);
       if (!data) {
         new SkillsList(skill).save();

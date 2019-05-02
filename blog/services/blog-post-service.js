@@ -9,6 +9,9 @@ const mongoose = modules.MONGOOSE;
 // files
 const blogPostModel = require(files.BLOG_POST_MODEL);
 
+// errors
+const NotFoundInDatabaseError = require(files.NOT_FOUND_IN_DATABASE_ERROR);
+
 const BlogPostModel = mongoose.model(blogPostModel);
 
 module.exports = class BlogPostService {
