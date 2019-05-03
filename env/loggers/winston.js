@@ -38,26 +38,36 @@ let options = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-  const file = new winston.transports.DailyRotateFile({
-    filename: 'errors-%DATE%.log',
+  const errorsFilesOptions = {
     dirname: `${appRoot}/logs`,
     maxSize: '1m',
+    maxFiles: '1',
+  };
+
+  const file = new winston.transports.DailyRotateFile({
+    ...errorsFilesOptions,
+    filename: 'errors.log',
+  });
+
+  const exceptionFile = new winston.transports.DailyRotateFile({
+    ...errorsFilesOptions,
+    filename: 'exception.log',
   });
 
   options = {
     ...options,
     level: 'info',
     transports: [file],
+    exceptionHandlers: [exceptionFile],
     format: combine(...formatArgs),
   };
 } else {
-  const console = new winston.transports.Console({});
+  const console = new winston.transports.Console({ handleExceptions: true });
 
   options = {
     ...options,
     level: 'debug',
     transports: [console],
-    colorize: true,
     format: combine(...formatArgs, colorize({ all: true })),
   };
 }

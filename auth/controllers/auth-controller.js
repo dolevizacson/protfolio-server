@@ -16,16 +16,16 @@ const authController = express.Router();
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
-    return next();
+    next();
   } else {
-    res.status(status.UNAUTHORIZED).end();
+    res.status(401).end();
   }
 }
 
 authController.get(
   routes.AUTH_REGISTER,
   helpers.asyncWrapper(async (req, res, next) => {
-    const userName = process.env.AUTH_USERNAME;
+    const username = process.env.AUTH_USERNAME;
     const password = process.env.AUTH_PASSWORD;
     const user = await authService.register(username, password);
     res.send(user);
@@ -35,9 +35,9 @@ authController.get(
 authController.post(
   routes.AUTH_LOGIN,
   helpers.asyncWrapper(async (req, res, next) => {
-    const { username, password } = req.body;
-    await authService.logIn(username, password);
-    res.send('Logged In');
+    //const { username, password } = req.body;
+    await authService.logIn(req, res, next);
+    res.send(`${req.user.username} is logged In`);
   })
 );
 
@@ -50,12 +50,12 @@ authController.get(
 );
 
 // remove later
-/* authController.get(
+authController.get(
   '/test',
   isLoggedIn,
   helpers.asyncWrapper(async (req, res, next) => {
     res.send('test logged in');
   })
-); */
+);
 
 module.exports = authController;

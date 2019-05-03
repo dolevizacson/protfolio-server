@@ -8,31 +8,19 @@ const morgan = modules.MORGAN;
 const path = modules.PATH;
 const rfs = modules.RFS;
 
-if (process.env.NODE_ENV === 'production') {
-  const options = {
-    skip: function(req, res) {
-      return res.statusCode < 400;
-    },
-  };
+// 'http-request.log'
 
+if (process.env.NODE_ENV === 'production') {
   try {
-    const logStream = rfs(
-      (time, index) => {
-        const date = new Date();
-        const currentDate = `${date.getFullYear()}-${date.getMonth() +
-          1}-${date.getDate()}`;
-        return `http-${currentDate}.log`;
-      },
-      {
-        size: '1M',
-        path: path.join(appRoot.toString(), 'logs'),
-      }
-    );
-    module.exports = morgan('common', { ...options, stream: logStream });
+    const logStream = rfs('http-request.log', {
+      maxFiles: 1,
+      size: '1M',
+      path: path.join(appRoot.toString(), 'logs'),
+    });
+    module.exports = morgan('common', { stream: logStream });
   } catch (err) {
     console.log('No HTTP logs: ' + err);
     module.exports = morgan('dev', {
-      ...options,
       stream: process.stderr,
     });
   }

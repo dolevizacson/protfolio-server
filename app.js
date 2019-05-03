@@ -12,6 +12,9 @@ modules.DOTENV.config();
 // files
 const mongoInit = require(files.MONGO);
 
+// errors
+const BadEndpointError = require(files.BAD_ENDPOINT_ERROR);
+
 // db connections
 mongoInit();
 
@@ -24,6 +27,10 @@ const blog = require(files.BLOG);
 const addErrorHandlers = require(files.ERROR_HANDLERS);
 const addMiddleware = require(files.MIDDLEWARE);
 
+process.on('uncaughtException', function(err) {
+  //mailer logic to report on problems with the app
+});
+
 const app = express();
 
 addMiddleware(app);
@@ -34,11 +41,16 @@ app.use(routes.HOME, home);
 app.use(routes.SKILLS, skills);
 app.use(routes.BLOG, blog);
 
-addErrorHandlers(app);
-
 // default route handler
 app.get('*', (req, res, next) => {
-  next(new BadEndpointError('No such route available'));
+  next(
+    new BadEndpointError(
+      'No such route available',
+      req.hostname + req.originalUrl
+    )
+  );
 });
+
+addErrorHandlers(app);
 
 module.exports = app;

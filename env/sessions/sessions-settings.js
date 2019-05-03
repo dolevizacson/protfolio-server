@@ -14,7 +14,7 @@ const optios = {
   secret: process.env.SESSIONS_SECRET,
   cookie: {
     httpOnly: true,
-    maxAge: 604800000, // 7 days
+    maxAge: 24 * 3600 * 3, // 3 days
   },
   store: new mongoStore({
     mongooseConnection: mongoose.connection,

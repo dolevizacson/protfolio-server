@@ -14,6 +14,7 @@ module.exports = {
 
   // errors
   NOT_FOUND_IN_DATABASE_ERROR: `${appRoot}/env/errors/not-found-in-database-error`,
+  BAD_ENDPOINT_ERROR: `${appRoot}/env/errors/bad-endpoint-error`,
 
   // auth
   AUTH: `${appRoot}/auth/controllers/auth-controller`,

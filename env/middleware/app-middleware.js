@@ -18,9 +18,9 @@ module.exports = function appMiddleware(app) {
   app.use(express.urlencoded({ extended: false }));
 
   // middleware
+  app.use(morgan);
   app.use(sessions);
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(morgan);
   app.use(cors());
 };
