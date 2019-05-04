@@ -3,9 +3,12 @@ const appRoot = require('app-root-path');
 const modules = require(`${appRoot}/env/dependencies/app-dependencies`);
 const files = require(`${appRoot}/env/constants/files-paths`);
 
-// functions  TODO add functions constants
+// files
 const appMiddleware = require(files.APP_MIDDLEWARE);
+const authMiddleware = require(files.AUTH_MIDDLEWARE);
 
-module.exports = function addMiddleware(app) {
+module.exports.auth = authMiddleware;
+
+module.exports.addMiddleware = function(app) {
   appMiddleware(app);
 };

@@ -8,19 +8,14 @@ const routes = require(`${appRoot}/env/constants/routes`);
 // modules
 const express = modules.EXPRESS;
 
+// files
+const middleware = require(files.MIDDLEWARE);
+
 // services
 const AuthService = require(files.AUTH_SERVICE);
 const authService = new AuthService();
 
 const authController = express.Router();
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    res.status(401).end();
-  }
-}
 
 authController.get(
   routes.AUTH_REGISTER,
@@ -34,25 +29,25 @@ authController.get(
 
 authController.post(
   routes.AUTH_LOGIN,
+  middleware.auth.authenticate,
   helpers.asyncWrapper(async (req, res, next) => {
-    //const { username, password } = req.body;
-    await authService.logIn(req, res, next);
-    res.send(`${req.user.username} is logged In`);
+    res.send(`Logged In successful`);
   })
 );
 
 authController.get(
   routes.AUTH_LOGOUT,
   helpers.asyncWrapper(async (req, res, next) => {
-    await authService.logOut(req);
-    res.send('Logged Out');
+    req.logout();
+    req.session.destroy();
+    res.send('Logged Out successful');
   })
 );
 
 // remove later
 authController.get(
   '/test',
-  isLoggedIn,
+  middleware.auth.isLoggedIn,
   helpers.asyncWrapper(async (req, res, next) => {
     res.send('test logged in');
   })

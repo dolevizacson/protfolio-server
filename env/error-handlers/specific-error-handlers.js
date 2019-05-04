@@ -9,6 +9,7 @@ const httpStatus = modules.HTTP_STATUS;
 // errors
 const NotFoundInDatabaseError = require(files.NOT_FOUND_IN_DATABASE_ERROR);
 const BadEndpointError = require(files.BAD_ENDPOINT_ERROR);
+const UserAuthenticationError = require(files.USER_AUTHENTICATION_ERROR);
 
 // error handlers
 const notFoundInDatabaseErrorHandler = (err, req, res, next) => {
@@ -19,6 +20,18 @@ const notFoundInDatabaseErrorHandler = (err, req, res, next) => {
       errorMessage += `: ${err.message}`;
     }
     return res.status(httpStatus.NOT_FOUND).send(errorMessage);
+  }
+  next(err);
+};
+
+const userAuthenticationErrorHandler = (err, req, res, next) => {
+  if (err instanceof UserAuthenticationError) {
+    let errorMessage = 'Authentication error ';
+
+    if (err.message) {
+      errorMessage += `: ${err.message}`;
+    }
+    return res.status(httpStatus.UNAUTHORIZED).send(errorMessage);
   }
   next(err);
 };
@@ -43,6 +56,7 @@ const DefaultErrorHandler = (err, req, res, next) => {
 
 module.exports = function specificErrorHandlers(app) {
   app.use(notFoundInDatabaseErrorHandler);
+  app.use(userAuthenticationErrorHandler);
   app.use(badEndpointErrorHandler);
   app.use(DefaultErrorHandler);
 };

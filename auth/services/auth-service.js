@@ -17,27 +17,4 @@ module.exports = class AuthService {
     const user = await UserModel.register({ username }, password);
     return user;
   }
-
-  async logIn(req, res, next) {
-    passport.authenticate('local', function(err, user, info) {
-      if (err) {
-        throw err;
-      }
-      if (!user) {
-        throw new LogInError('failed to login');
-      }
-
-      req.logIn(user, function(err) {
-        if (err) {
-          throw err;
-        }
-        return user;
-      });
-    })(req, res, next);
-  }
-
-  async logOut(req) {
-    req.logout();
-    req.session.destroy();
-  }
 };

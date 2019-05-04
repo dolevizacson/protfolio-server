@@ -2,6 +2,7 @@ const appRoot = require('app-root-path');
 
 module.exports = {
   APP_MIDDLEWARE: `${appRoot}/env/middleware/app-middleware`,
+  AUTH_MIDDLEWARE: `${appRoot}/env/middleware/auth-middleware`,
   ERRORS: `${appRoot}/env/errors/errors`,
   ERROR_HANDLERS: `${appRoot}/env/error-handlers/error-handlers`,
   GENERAL_ERROR_HANDLERS: `${appRoot}/env/error-handlers/general-error-handlers`,
@@ -15,6 +16,7 @@ module.exports = {
   // errors
   NOT_FOUND_IN_DATABASE_ERROR: `${appRoot}/env/errors/not-found-in-database-error`,
   BAD_ENDPOINT_ERROR: `${appRoot}/env/errors/bad-endpoint-error`,
+  USER_AUTHENTICATION_ERROR: `${appRoot}/env/errors/user-authentication-error`,
 
   // auth
   AUTH: `${appRoot}/auth/controllers/auth-controller`,

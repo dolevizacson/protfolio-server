@@ -24,16 +24,15 @@ const skills = require(files.SKILLS);
 const auth = require(files.AUTH);
 const blog = require(files.BLOG);
 
-const addErrorHandlers = require(files.ERROR_HANDLERS);
-const addMiddleware = require(files.MIDDLEWARE);
+const errorHandlers = require(files.ERROR_HANDLERS);
+const middleware = require(files.MIDDLEWARE);
 
 process.on('uncaughtException', function(err) {
   //mailer logic to report on problems with the app
 });
 
 const app = express();
-
-addMiddleware(app);
+middleware.addMiddleware(app);
 
 // routes
 app.use(routes.AUTH, auth);
@@ -51,6 +50,6 @@ app.get('*', (req, res, next) => {
   );
 });
 
-addErrorHandlers(app);
+errorHandlers.addErrorHandlers(app);
 
 module.exports = app;
