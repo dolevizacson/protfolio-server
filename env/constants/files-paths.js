@@ -6,6 +6,7 @@ module.exports = {
   ERRORS: `${appRoot}/env/errors/errors`,
   ERROR_HANDLERS: `${appRoot}/env/error-handlers/error-handlers`,
   GENERAL_ERROR_HANDLERS: `${appRoot}/env/error-handlers/general-error-handlers`,
+  HELPERS_FUNCTIONS: `${appRoot}/env/functions/helpers-functions`,
   SPECIFIC_ERROR_HANDLERS: `${appRoot}/env/error-handlers/specific-error-handlers`,
   MIDDLEWARE: `${appRoot}/env/middleware/middleware`,
   MONGO: `${appRoot}/env/DB/mongo/connection-settings`,

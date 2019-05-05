@@ -1,8 +1,5 @@
 // initialization
-const appRoot = require('app-root-path');
-const modules = require(`${appRoot}/env/dependencies/app-dependencies`);
-const files = require(`${appRoot}/env/constants/files-paths`);
-const helpers = require(`${appRoot}/env/functions/helpers`);
+const { modules, files, functions, routes } = require('../../utils/access');
 
 // modules
 const mongoose = modules.MONGOOSE;

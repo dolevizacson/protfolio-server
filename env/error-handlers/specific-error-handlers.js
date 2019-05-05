@@ -1,7 +1,5 @@
 // initialization
-const appRoot = require('app-root-path');
-const modules = require(`${appRoot}/env/dependencies/app-dependencies`);
-const files = require(`${appRoot}/env/constants/files-paths`);
+const { modules, files, functions, routes } = require('../utils/access');
 
 // modules
 const httpStatus = modules.HTTP_STATUS;
@@ -43,7 +41,7 @@ const badEndpointErrorHandler = (err, req, res, next) => {
     if (err.message && err.url) {
       errorMessage += `: ${err.url} ${err.message}`;
     }
-    return res.status(httpStatus.BAD_REQUEST).send(errorMessage);
+    return res.status(httpStatus.NOT_FOUND).send(errorMessage);
   }
   next(err);
 };

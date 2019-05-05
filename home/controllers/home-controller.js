@@ -1,9 +1,5 @@
 // initialization
-const appRoot = require('app-root-path');
-const modules = require(`${appRoot}/env/dependencies/app-dependencies`);
-const files = require(`${appRoot}/env/constants/files-paths`);
-const helpers = require(`${appRoot}/env/functions/helpers`);
-const routes = require(`${appRoot}/env/constants/routes`);
+const { modules, files, functions, routes } = require('../../env/utils/access');
 
 // modules
 const express = modules.EXPRESS;
@@ -17,7 +13,7 @@ const homeController = express.Router();
 // GET
 homeController.get(
   routes.READ_HOME_ABOUT,
-  helpers.asyncWrapper(async (req, res, next) => {
+  functions.helpers.asyncWrapper(async (req, res, next) => {
     const about = await homeContentService.readOne('about');
     res.send(about);
   })
@@ -25,7 +21,7 @@ homeController.get(
 
 homeController.get(
   routes.READ_HOME_MOTO,
-  helpers.asyncWrapper(async (req, res, next) => {
+  functions.helpers.asyncWrapper(async (req, res, next) => {
     const moto = await homeContentService.readOne('moto');
     res.send(moto);
   })
@@ -33,7 +29,7 @@ homeController.get(
 
 homeController.get(
   routes.READ_HOME_WORKING_ON,
-  helpers.asyncWrapper(async (req, res, next) => {
+  functions.helpers.asyncWrapper(async (req, res, next) => {
     const workingOn = await homeContentService.readAll();
     res.send(workingOn);
   })

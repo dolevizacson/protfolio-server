@@ -1,9 +1,5 @@
 // initialization
-const appRoot = require('app-root-path');
-const modules = require(`${appRoot}/env/dependencies/app-dependencies`);
-const files = require(`${appRoot}/env/constants/files-paths`);
-const helpers = require(`${appRoot}/env/functions/helpers`);
-const routes = require(`${appRoot}/env/constants/routes`);
+const { modules, files, functions, routes } = require('./env/utils/access');
 
 // modules
 const express = modules.EXPRESS;
@@ -11,6 +7,8 @@ modules.DOTENV.config();
 
 // files
 const mongoInit = require(files.MONGO);
+const errorHandlers = require(files.ERROR_HANDLERS);
+const middleware = require(files.MIDDLEWARE);
 
 // errors
 const BadEndpointError = require(files.BAD_ENDPOINT_ERROR);
@@ -24,14 +22,12 @@ const skills = require(files.SKILLS);
 const auth = require(files.AUTH);
 const blog = require(files.BLOG);
 
-const errorHandlers = require(files.ERROR_HANDLERS);
-const middleware = require(files.MIDDLEWARE);
-
 process.on('uncaughtException', function(err) {
   //mailer logic to report on problems with the app
 });
 
 const app = express();
+
 middleware.addMiddleware(app);
 
 // routes

@@ -1,9 +1,5 @@
 // initialization
-const appRoot = require('app-root-path');
-const modules = require(`${appRoot}/env/dependencies/app-dependencies`);
-const files = require(`${appRoot}/env/constants/files-paths`);
-const helpers = require(`${appRoot}/env/functions/helpers`);
-const routes = require(`${appRoot}/env/constants/routes`);
+const { modules, files, functions, routes } = require('../../env/utils/access');
 
 // modules
 const express = modules.EXPRESS;
@@ -19,7 +15,7 @@ const authController = express.Router();
 
 authController.get(
   routes.AUTH_REGISTER,
-  helpers.asyncWrapper(async (req, res, next) => {
+  functions.helpers.asyncWrapper(async (req, res, next) => {
     const username = process.env.AUTH_USERNAME;
     const password = process.env.AUTH_PASSWORD;
     const user = await authService.register(username, password);
@@ -30,14 +26,14 @@ authController.get(
 authController.post(
   routes.AUTH_LOGIN,
   middleware.auth.authenticate,
-  helpers.asyncWrapper(async (req, res, next) => {
+  functions.helpers.asyncWrapper(async (req, res, next) => {
     res.send(`Logged In successful`);
   })
 );
 
 authController.get(
   routes.AUTH_LOGOUT,
-  helpers.asyncWrapper(async (req, res, next) => {
+  functions.helpers.asyncWrapper(async (req, res, next) => {
     req.logout();
     req.session.destroy();
     res.send('Logged Out successful');
@@ -48,7 +44,7 @@ authController.get(
 authController.get(
   '/test',
   middleware.auth.isLoggedIn,
-  helpers.asyncWrapper(async (req, res, next) => {
+  functions.helpers.asyncWrapper(async (req, res, next) => {
     res.send('test logged in');
   })
 );
