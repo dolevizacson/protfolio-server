@@ -10,16 +10,21 @@ const modelName = 'blogPost';
 
 const paragraphSchema = new Schema({
   header: String,
-  content: String,
+  content: { type: String, required: true },
   //image
 });
 
 const blogPostSchema = new Schema(
   {
     active: { type: Boolean, default: true },
-    header: String,
+    header: { type: String, required: true },
     date: { type: Date, default: Date.now() },
-    paragraph: [{ type: paragraphSchema }],
+    paragraph: {
+      type: [paragraphSchema],
+      validate: paragraphArray =>
+        paragraphArray == null || paragraphArray.length > 0,
+    },
+
     footer: String,
   },
   { collection: modelName }

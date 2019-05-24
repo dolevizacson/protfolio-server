@@ -1,10 +1,4 @@
 module.exports = {
-  //home
-  HOME: '/home',
-  READ_HOME_ABOUT: '/about', // GET
-  READ_HOME_MOTO: '/moto', // GET
-  READ_HOME_WORKING_ON: '/workingon', // GET
-
   // skills
   SKILLS: '/skills',
   READ_SKILLS_LIST: '/skillslist', // GET
@@ -13,6 +7,7 @@ module.exports = {
   AUTH: '/auth',
   AUTH_LOGOUT: '/logout',
   AUTH_LOGIN: '/login',
+  AUTH_IS_LOGGED_IN: '/isloggedin',
   AUTH_REGISTER: '/register',
 
   // blog

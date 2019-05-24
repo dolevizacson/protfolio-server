@@ -5,6 +5,7 @@ const { modules, files, functions, routes } = require('../utils/access');
 const express = modules.EXPRESS;
 const cors = modules.CORS;
 const passport = modules.PASSPORT;
+const helmet = modules.HELMET;
 
 //files
 const sessions = require(files.SESSIONS);
@@ -17,6 +18,7 @@ module.exports = function appMiddleware(app) {
 
   // middleware
   app.use(morgan);
+  app.use(helmet());
   app.use(sessions);
   app.use(passport.initialize());
   app.use(passport.session());

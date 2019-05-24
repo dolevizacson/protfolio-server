@@ -27,7 +27,7 @@ authController.post(
   routes.AUTH_LOGIN,
   middleware.auth.authenticate,
   functions.helpers.asyncWrapper(async (req, res, next) => {
-    res.send(`Logged In successful`);
+    res.send(`Log In successful`);
   })
 );
 
@@ -36,16 +36,15 @@ authController.get(
   functions.helpers.asyncWrapper(async (req, res, next) => {
     req.logout();
     req.session.destroy();
-    res.send('Logged Out successful');
+    res.send('Logout successful');
   })
 );
 
-// remove later
 authController.get(
-  '/test',
+  routes.AUTH_IS_LOGGED_IN,
   middleware.auth.isLoggedIn,
   functions.helpers.asyncWrapper(async (req, res, next) => {
-    res.send('test logged in');
+    res.send('logged in');
   })
 );
 

@@ -4,6 +4,7 @@ module.exports = {
   DOTENV: require('dotenv'),
   EXPRESS: require('express'),
   SESSIONS: require('express-session'),
+  HELMET: require('helmet'),
   HTTP_STATUS: require('http-status-codes'),
   MONGOOSE: require('mongoose'),
   MORGAN: require('morgan'),

@@ -32,7 +32,7 @@ module.exports = class BlogPostService {
   }
 
   async create(blogPost) {
-    return await BlogPost.create(blogPost);
+    return await BlogPostModel.create(blogPost);
   }
 
   async update(id, blogPost) {
