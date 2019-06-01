@@ -3,6 +3,10 @@ const { modules, files, functions, routes } = require('../../env/utils/access');
 
 // modules
 const express = modules.EXPRESS;
+const httpStatus = modules.HTTP_STATUS;
+
+// files
+const middleware = require(files.MIDDLEWARE);
 
 // services
 const BlogPostService = require(files.BLOG_POST_SERVICE);
@@ -32,15 +36,17 @@ blogController.get(
 // POST
 blogController.post(
   routes.CREATE_BLOG_POST,
+  middleware.auth.isLoggedIn,
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const blogPost = await blogPostService.create(req.body);
-    res.send(blogPost);
+    res.status(httpStatus.CREATED).send(blogPost);
   })
 );
 
 // PUT
-blogController.post(
+blogController.put(
   routes.UPDATE_BLOG_POST,
+  middleware.auth.isLoggedIn,
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const id = req.params.id;
     const blogPost = await blogPostService.update(id, req.body);
@@ -49,8 +55,9 @@ blogController.post(
 );
 
 // DELETE
-blogController.post(
+blogController.delete(
   routes.DELETE_BLOG_POST,
+  middleware.auth.isLoggedIn,
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const id = req.params.id;
     const blogPost = await blogPostService.deleteOne(id, req.body);

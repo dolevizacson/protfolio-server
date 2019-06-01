@@ -11,15 +11,16 @@ module.exports = {
   authenticate(req, res, next) {
     passport.authenticate('local', function(err, user, info) {
       if (err) {
-        throw err;
+        return next(new Error('problem in authentication proccess'));
       }
+
       if (!user) {
-        throw new UserAuthenticationError('failed to login');
+        return next(new UserAuthenticationError('failed to login'));
       }
 
       req.logIn(user, function(err) {
         if (err) {
-          throw err;
+          return next(new Error('problem in login proccess'));
         }
         next();
       });

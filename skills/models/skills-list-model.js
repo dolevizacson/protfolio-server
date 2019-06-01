@@ -10,7 +10,6 @@ const modelName = 'skillsList';
 
 const stackSchema = new Schema({
   language: String,
-  icon: String,
   longData: [
     {
       type: String,
