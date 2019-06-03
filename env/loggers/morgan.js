@@ -2,12 +2,12 @@
 const { modules, files, functions, routes } = require('../utils/access');
 
 //modules
+const appRoot = modules.APPROOT;
 const morgan = modules.MORGAN;
 const path = modules.PATH;
 const rfs = modules.RFS;
 
 // 'http-request.log'
-
 if (process.env.NODE_ENV === 'production') {
   try {
     const logStream = rfs('http-request.log', {

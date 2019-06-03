@@ -3,6 +3,7 @@ const appRoot = require('app-root-path');
 module.exports = {
   APP_MIDDLEWARE: `${appRoot}/env/middleware/app-middleware`,
   AUTH_MIDDLEWARE: `${appRoot}/env/middleware/auth-middleware`,
+  CORS: `${appRoot}/env/cors/cors-settings`,
   ERRORS: `${appRoot}/env/errors/errors`,
   ERROR_HANDLERS: `${appRoot}/env/error-handlers/error-handlers`,
   GENERAL_ERROR_HANDLERS: `${appRoot}/env/error-handlers/general-error-handlers`,

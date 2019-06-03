@@ -3,13 +3,13 @@ const { modules, files, functions, routes } = require('../utils/access');
 
 // modules
 const express = modules.EXPRESS;
-const cors = modules.CORS;
 const passport = modules.PASSPORT;
 const helmet = modules.HELMET;
 
 //files
 const sessions = require(files.SESSIONS);
 const morgan = require(files.MORGAN);
+const cors = require(files.CORS);
 
 module.exports = function appMiddleware(app) {
   // express middleware
@@ -22,5 +22,5 @@ module.exports = function appMiddleware(app) {
   app.use(sessions);
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(cors());
+  app.use(cors);
 };

@@ -2,6 +2,7 @@
 const { modules, files, functions, routes } = require('../utils/access');
 
 // modules
+const appRoot = modules.APPROOT;
 const winston = modules.WINSTON;
 modules.WRFS;
 const { combine, timestamp, splat, errors, colorize, printf } = winston.format;
