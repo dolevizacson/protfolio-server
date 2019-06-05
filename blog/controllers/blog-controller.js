@@ -60,7 +60,7 @@ blogController.delete(
   middleware.auth.isLoggedIn,
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const id = req.params.id;
-    const blogPost = await blogPostService.deleteOne(id, req.body);
+    const blogPost = await blogPostService.deleteOne(id);
     res.send(blogPost);
   })
 );

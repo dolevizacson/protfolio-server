@@ -23,7 +23,7 @@ module.exports = class BlogPostService {
   }
 
   async readOne(id) {
-    const blogPost = await BlogPostModel.findOne({ id: id, active: true });
+    const blogPost = await BlogPostModel.findOne({ _id: id, active: true });
     if (!blogPost) {
       throw new NotFoundInDatabaseError('Post not found in database');
     } else {
@@ -37,7 +37,7 @@ module.exports = class BlogPostService {
 
   async update(id, blogPost) {
     const updatedBlogPost = await BlogPostModel.findOneAndUpdate(
-      { id: id, active: true },
+      { _id: id, active: true },
       blogPost
     );
     if (!updatedBlogPost) {
@@ -49,7 +49,7 @@ module.exports = class BlogPostService {
 
   async deleteOne(id) {
     const deletedBlogPost = await BlogPostModel.findOneAndUpdate(
-      { id: id },
+      { _id: id },
       { active: false }
     );
     if (!deletedBlogPost) {
