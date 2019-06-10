@@ -10,4 +10,5 @@ module.exports = functions.helpers.asyncWrapper(async (req, res, next) => {
     useFindAndModify: false,
     useCreateIndex: true,
   });
+  console.log('Mongo DB connected');
 });

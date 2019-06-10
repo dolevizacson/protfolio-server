@@ -1,12 +1,14 @@
 {
   "name": "protfolio-server",
   "version": "0.0.0",
+  "main": "./bin/www",
   "private": true,
   "scripts": {
-    "start-dev": "nodemon ./bin/www",
-    "start-prod": "cross-env NODE_ENV=production node ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "start": "cross-env NODE_ENV=production node ./bin/www"
   },
   "dependencies": {
+    "@hapi/joi": "^15.0.3",
     "app-root-path": "^2.2.1",
     "connect-mongo": "^2.0.3",
     "cors": "^2.8.5",

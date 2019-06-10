@@ -10,7 +10,7 @@ let options = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-  const whitelist = process.env.CORS.split(' ');
+  const whitelist = process.env.CORS_WHITE_LIST.split(' ');
   options = {
     ...options,
     origin: function(origin, callback) {

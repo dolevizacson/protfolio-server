@@ -1,4 +1,5 @@
 module.exports = {
+  JOI: require('@hapi/joi'),
   APPROOT: require('app-root-path'),
   MONGO_STORE: require('connect-mongo'),
   CORS: require('cors'),

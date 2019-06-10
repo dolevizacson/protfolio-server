@@ -13,6 +13,7 @@ module.exports = {
   MONGO: `${appRoot}/env/DB/mongo/connection-settings`,
   MORGAN: `${appRoot}/env/loggers/morgan`,
   SESSIONS: `${appRoot}/env/sessions/sessions-settings`,
+  VALIDATION_MIDDLEWARE: `${appRoot}/env/middleware/validation-middleware`,
   WINSTON: `${appRoot}/env/loggers/winston`,
 
   // errors
