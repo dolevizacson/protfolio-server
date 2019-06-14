@@ -1,8 +1,15 @@
 // initialization
-const { modules, files, functions, routes } = require('../../env/utils/access');
+const {
+  modules,
+  files,
+  functions,
+  routes,
+  constants,
+} = require('../../env/utils/access');
 
 // modules
 const mongoose = modules.MONGOOSE;
+const Joi = modules.JOI;
 
 const { Schema } = mongoose;
 
@@ -29,6 +36,27 @@ const blogPostSchema = new Schema(
   },
   { collection: modelName }
 );
+
+const defaultValidationSchema = Joi.object().keys({
+  header: Joi.string().required(),
+  paragraph: Joi.array()
+    .items(
+      Joi.object().keys({
+        header: Joi.string(),
+        content: Joi.string().required(),
+      })
+    )
+    .min(1),
+  footer: Joi.string(),
+});
+
+blogPostSchema.static(constants.validation.joiModelValidation, function() {
+  return {
+    scopes: {
+      [constants.validation.scopes.DEFAULT]: defaultValidationSchema,
+    },
+  };
+});
 
 mongoose.model(modelName, blogPostSchema);
 

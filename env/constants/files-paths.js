@@ -20,6 +20,8 @@ module.exports = {
   NOT_FOUND_IN_DATABASE_ERROR: `${appRoot}/env/errors/not-found-in-database-error`,
   BAD_ENDPOINT_ERROR: `${appRoot}/env/errors/bad-endpoint-error`,
   USER_AUTHENTICATION_ERROR: `${appRoot}/env/errors/user-authentication-error`,
+  ROUTE_VALIDATION_ERROR: `${appRoot}/env/errors/route-validation-error`,
+  MISSING_VALIDATION_INFORMATION_SCHEMA_ERROR: `${appRoot}/env/errors/missing-validation-information-schema-error`,
 
   // auth
   AUTH: `${appRoot}/auth/controllers/auth-controller`,

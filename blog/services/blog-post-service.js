@@ -1,16 +1,14 @@
 // initialization
 const { modules, files, functions, routes } = require('../../env/utils/access');
 
-// modules
-const mongoose = modules.MONGOOSE;
-
 // files
 const blogPostModel = require(files.BLOG_POST_MODEL);
 
 // errors
 const NotFoundInDatabaseError = require(files.NOT_FOUND_IN_DATABASE_ERROR);
 
-const BlogPostModel = mongoose.model(blogPostModel);
+// models
+const BlogPostModel = functions.helpers.getMongooseModel(blogPostModel);
 
 module.exports = class BlogPostService {
   async readAll() {

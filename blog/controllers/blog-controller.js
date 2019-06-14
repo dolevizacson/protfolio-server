@@ -1,5 +1,11 @@
 // initialization
-const { modules, files, functions, routes } = require('../../env/utils/access');
+const {
+  modules,
+  files,
+  functions,
+  routes,
+  constants,
+} = require('../../env/utils/access');
 
 // modules
 const express = modules.EXPRESS;
@@ -7,10 +13,14 @@ const httpStatus = modules.HTTP_STATUS;
 
 // files
 const middleware = require(files.MIDDLEWARE);
+const blogPostModel = require(files.BLOG_POST_MODEL);
 
 // services
 const BlogPostService = require(files.BLOG_POST_SERVICE);
 const blogPostService = new BlogPostService();
+
+// models
+const BlogPostModel = functions.helpers.getMongooseModel(blogPostModel);
 
 const blogController = express.Router();
 
@@ -37,6 +47,10 @@ blogController.get(
 blogController.post(
   routes.CREATE_BLOG_POST,
   middleware.auth.isLoggedIn,
+  middleware.validation.validate(
+    BlogPostModel,
+    constants.validation.scopes.DEFAULT
+  ),
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const blogPost = await blogPostService.create(req.body);
     res.status(httpStatus.CREATED).send(blogPost);

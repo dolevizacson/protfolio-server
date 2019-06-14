@@ -9,6 +9,8 @@ const mongoose = modules.MONGOOSE;
 const NotFoundInDatabaseError = require(files.NOT_FOUND_IN_DATABASE_ERROR);
 const BadEndpointError = require(files.BAD_ENDPOINT_ERROR);
 const UserAuthenticationError = require(files.USER_AUTHENTICATION_ERROR);
+const MissingValidationInformationSchemaError = require(files.MISSING_VALIDATION_INFORMATION_SCHEMA_ERROR);
+const RouteValidationError = require(files.ROUTE_VALIDATION_ERROR);
 
 // error handlers
 const notFoundInDatabaseErrorHandler = (err, req, res, next) => {
@@ -35,7 +37,22 @@ const userAuthenticationErrorHandler = (err, req, res, next) => {
   next(err);
 };
 
-const ValidationErrorHandler = (err, req, res, next) => {
+const routesValidationErrorHandler = (err, req, res, next) => {
+  if (
+    err instanceof MissingValidationInformationSchemaError ||
+    err instanceof RouteValidationError
+  ) {
+    let errorMessage = 'route validation error ';
+
+    if (err.message) {
+      errorMessage += `: ${err.message}`;
+    }
+    return res.status(httpStatus.UNPROCESSABLE_ENTITY).send(errorMessage);
+  }
+  next(err);
+};
+
+const databaseValidationErrorHandler = (err, req, res, next) => {
   if (
     err instanceof mongoose.Error.ValidationError ||
     err instanceof mongoose.Error.CastError ||
@@ -73,7 +90,8 @@ const DefaultErrorHandler = (err, req, res, next) => {
 module.exports = function specificErrorHandlers(app) {
   app.use(notFoundInDatabaseErrorHandler);
   app.use(userAuthenticationErrorHandler);
-  app.use(ValidationErrorHandler);
+  app.use(routesValidationErrorHandler);
+  app.use(databaseValidationErrorHandler);
   app.use(badEndpointErrorHandler);
   app.use(DefaultErrorHandler);
 };
