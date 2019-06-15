@@ -10,6 +10,9 @@ const {
 // modules
 const Joi = modules.JOI;
 
+// constants
+const { scopes } = constants.validation;
+
 // errors
 const MissingValidationInformationSchemaError = require(files.MISSING_VALIDATION_INFORMATION_SCHEMA_ERROR);
 const RouteValidationError = require(files.ROUTE_VALIDATION_ERROR);
@@ -36,19 +39,20 @@ const getValidationSchema = (model, scope) => {
 };
 
 module.exports = {
-  validate(model, scope = constants.validation.scopes.DEFAULT, options = {}) {
-    return (
-      this.validate[(model, scope, options)] ||
-      (this.validate[(model, scope, options)] = function(req, res, next) {
-        const { body } = req;
-        let validationSchema;
-        try {
-          validationSchema = getValidationSchema(model, scope);
-        } catch (err) {
-          next(err);
-        }
-
-        Joi.validate(body, validationSchema, options, (err, value) => {
+  validate(model, scope = scopes.DEFAULT, options = {}) {
+    return (req, res, next) => {
+      const { body } = req;
+      let validationSchema;
+      try {
+        validationSchema = getValidationSchema(model, scope);
+      } catch (err) {
+        next(err);
+      }
+      Joi.validate(
+        body,
+        validationSchema,
+        { ...options, allowUnknown: true },
+        (err, value) => {
           return err === null
             ? next()
             : next(
@@ -56,8 +60,8 @@ module.exports = {
                   err.message || `Route validation error on `
                 )
               );
-        });
-      })
-    );
+        }
+      );
+    };
   },
 };

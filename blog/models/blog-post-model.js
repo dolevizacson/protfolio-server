@@ -11,6 +11,12 @@ const {
 const mongoose = modules.MONGOOSE;
 const Joi = modules.JOI;
 
+// files
+const blogPostModelValidation = require(files.BLOG_POST_MODEL_VALIDATION);
+
+// constants
+const { scopes, joiModelValidation } = constants.validation;
+
 const { Schema } = mongoose;
 
 const modelName = 'blogPost';
@@ -37,23 +43,13 @@ const blogPostSchema = new Schema(
   { collection: modelName }
 );
 
-const defaultValidationSchema = Joi.object().keys({
-  header: Joi.string().required(),
-  paragraph: Joi.array()
-    .items(
-      Joi.object().keys({
-        header: Joi.string(),
-        content: Joi.string().required(),
-      })
-    )
-    .min(1),
-  footer: Joi.string(),
-});
-
-blogPostSchema.static(constants.validation.joiModelValidation, function() {
+// validation
+blogPostSchema.static(joiModelValidation, function() {
   return {
     scopes: {
-      [constants.validation.scopes.DEFAULT]: defaultValidationSchema,
+      [scopes.blogPost.DEFAULT]:
+        blogPostModelValidation.defaultValidationSchema,
+      [scopes.blogPost.UPDATE]: blogPostModelValidation.updateValidationSchema,
     },
   };
 });

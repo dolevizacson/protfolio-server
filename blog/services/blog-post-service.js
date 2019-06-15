@@ -36,7 +36,8 @@ module.exports = class BlogPostService {
   async update(id, blogPost) {
     const updatedBlogPost = await BlogPostModel.findOneAndUpdate(
       { _id: id, active: true },
-      blogPost
+      blogPost,
+      { new: true }
     );
     if (!updatedBlogPost) {
       throw new NotFoundInDatabaseError('Post not found in database');

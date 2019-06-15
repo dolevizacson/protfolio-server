@@ -15,6 +15,9 @@ const httpStatus = modules.HTTP_STATUS;
 const middleware = require(files.MIDDLEWARE);
 const blogPostModel = require(files.BLOG_POST_MODEL);
 
+// constants
+const { scopes } = constants.validation;
+
 // services
 const BlogPostService = require(files.BLOG_POST_SERVICE);
 const blogPostService = new BlogPostService();
@@ -47,10 +50,7 @@ blogController.get(
 blogController.post(
   routes.CREATE_BLOG_POST,
   middleware.auth.isLoggedIn,
-  middleware.validation.validate(
-    BlogPostModel,
-    constants.validation.scopes.DEFAULT
-  ),
+  middleware.validation.validate(BlogPostModel, scopes.blogPost.DEFAULT),
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const blogPost = await blogPostService.create(req.body);
     res.status(httpStatus.CREATED).send(blogPost);
@@ -61,6 +61,7 @@ blogController.post(
 blogController.put(
   routes.UPDATE_BLOG_POST,
   middleware.auth.isLoggedIn,
+  middleware.validation.validate(BlogPostModel, scopes.blogPost.UPDATE),
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const id = req.params.id;
     const blogPost = await blogPostService.update(id, req.body);

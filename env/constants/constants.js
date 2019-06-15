@@ -3,6 +3,10 @@ module.exports = {
     joiModelValidation: 'joiValidator',
     scopes: {
       DEFAULT: 'default',
+      blogPost: {
+        DEFAULT: 'default',
+        UPDATE: 'update',
+      },
     },
   },
 };

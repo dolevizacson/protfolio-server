@@ -42,7 +42,7 @@ const routesValidationErrorHandler = (err, req, res, next) => {
     err instanceof MissingValidationInformationSchemaError ||
     err instanceof RouteValidationError
   ) {
-    let errorMessage = 'route validation error ';
+    let errorMessage = 'validation error ';
 
     if (err.message) {
       errorMessage += `: ${err.message}`;

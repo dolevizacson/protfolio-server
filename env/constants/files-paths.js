@@ -37,4 +37,5 @@ module.exports = {
   BLOG: `${appRoot}/blog/controllers/blog-controller`,
   BLOG_POST_SERVICE: `${appRoot}/blog/services/blog-post-service`,
   BLOG_POST_MODEL: `${appRoot}/blog/models/blog-post-model`,
+  BLOG_POST_MODEL_VALIDATION: `${appRoot}/blog/validation/blog-post-model-validation`,
 };
