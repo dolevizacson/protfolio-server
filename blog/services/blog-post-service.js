@@ -11,8 +11,17 @@ const NotFoundInDatabaseError = require(files.NOT_FOUND_IN_DATABASE_ERROR);
 const BlogPostModel = functions.helpers.getMongooseModel(blogPostModel);
 
 module.exports = class BlogPostService {
-  async readAll() {
+  async readAllActive() {
     const blogPosts = await BlogPostModel.find({ active: true });
+    if (!blogPosts) {
+      throw new NotFoundInDatabaseError('No posts in database');
+    } else {
+      return blogPosts;
+    }
+  }
+
+  async readAll() {
+    const blogPosts = await BlogPostModel.find();
     if (!blogPosts) {
       throw new NotFoundInDatabaseError('No posts in database');
     } else {
@@ -46,11 +55,21 @@ module.exports = class BlogPostService {
     }
   }
 
-  async deleteOne(id) {
-    const deletedBlogPost = await BlogPostModel.findOneAndUpdate(
+  async toggle(id, state) {
+    const toggledBlogPost = await BlogPostModel.findOneAndUpdate(
       { _id: id },
-      { active: false }
+      { active: state },
+      { new: true }
     );
+    if (!toggledBlogPost) {
+      throw new NotFoundInDatabaseError('Post not found in database');
+    } else {
+      return toggledBlogPost;
+    }
+  }
+
+  async deleteOne(id) {
+    const deletedBlogPost = await BlogPostModel.findOneAndDelete({ _id: id });
     if (!deletedBlogPost) {
       throw new NotFoundInDatabaseError('Post not found in database');
     } else {

@@ -32,10 +32,17 @@ module.exports = {
   SKILLS: `${appRoot}/skills/controllers/skills-controller`,
   SKILLS_CONTENT_SERVICE: `${appRoot}/skills/services/skills-content-service`,
   SKILLS_LIST_MODEL: `${appRoot}/skills/models/skills-list-model`,
+  SKILLS_LIST_MODEL_VALIDATION: `${appRoot}/skills/validation/skills-list-model-validation`,
 
   //blog
   BLOG: `${appRoot}/blog/controllers/blog-controller`,
   BLOG_POST_SERVICE: `${appRoot}/blog/services/blog-post-service`,
   BLOG_POST_MODEL: `${appRoot}/blog/models/blog-post-model`,
   BLOG_POST_MODEL_VALIDATION: `${appRoot}/blog/validation/blog-post-model-validation`,
+
+  // working on
+  WORKING_ON: `${appRoot}/working-on/controllers/working-on-controller`,
+  WORKING_ON_TASK_SERVICE: `${appRoot}/working-on/services/working-on-task-service`,
+  WORKING_ON_TASK_MODEL: `${appRoot}/working-on/models/working-on-task-model`,
+  WORKING_ON_TASK_VALIDATION: `${appRoot}/working-on/validation/working-on-task-model-validation`,
 };

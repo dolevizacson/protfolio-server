@@ -9,7 +9,6 @@ const {
 
 // modules
 const mongoose = modules.MONGOOSE;
-const Joi = modules.JOI;
 
 // files
 const blogPostModelValidation = require(files.BLOG_POST_MODEL_VALIDATION);
@@ -43,6 +42,12 @@ const blogPostSchema = new Schema(
   { collection: modelName }
 );
 
+blogPostSchema.methods.toJSON = function() {
+  let returnObject = this.toObject();
+  delete returnObject.active;
+  return returnObject;
+};
+
 // validation
 blogPostSchema.static(joiModelValidation, function() {
   return {
@@ -50,6 +55,7 @@ blogPostSchema.static(joiModelValidation, function() {
       [scopes.blogPost.DEFAULT]:
         blogPostModelValidation.defaultValidationSchema,
       [scopes.blogPost.UPDATE]: blogPostModelValidation.updateValidationSchema,
+      [scopes.blogPost.TOGGLE]: blogPostModelValidation.toggleValidationSchema,
     },
   };
 });

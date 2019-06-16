@@ -12,35 +12,34 @@ const Joi = modules.JOI;
 
 module.exports = {
   defaultValidationSchema: Joi.object().keys({
-    header: Joi.string().required(),
-    paragraph: Joi.array()
+    topic: Joi.string().required(),
+    image: Joi.string().required(),
+    stack: Joi.array()
       .items(
         Joi.object().keys({
-          header: Joi.string(),
-          content: Joi.string().required(),
+          language: Joi.string().required(),
+          longData: Joi.array()
+            .items(Joi.string())
+            .min(1),
         })
       )
       .min(1),
-    footer: Joi.string(),
   }),
 
   updateValidationSchema: Joi.object().keys({
     _id: Joi.string().required(),
-    header: Joi.string().required(),
-    date: Joi.date().required(),
-    paragraph: Joi.array()
+    topic: Joi.string().required(),
+    image: Joi.string().required(),
+    stack: Joi.array()
       .items(
         Joi.object().keys({
           _id: Joi.string().required(),
-          header: Joi.string(),
-          content: Joi.string().required(),
+          language: Joi.string().required(),
+          longData: Joi.array()
+            .items(Joi.string())
+            .min(1),
         })
       )
       .min(1),
-    footer: Joi.string(),
-  }),
-
-  toggleValidationSchema: Joi.object().keys({
-    state: Joi.boolean().required(),
   }),
 };
