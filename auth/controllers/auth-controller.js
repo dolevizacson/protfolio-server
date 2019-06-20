@@ -6,10 +6,13 @@ const express = modules.EXPRESS;
 
 // files
 const middleware = require(files.MIDDLEWARE);
+const userModel = require(files.USER_MODEL);
 
 // services
 const AuthService = require(files.AUTH_SERVICE);
 const authService = new AuthService();
+
+const UserModel = functions.helpers.getMongooseModel(userModel);
 
 const authController = express.Router();
 
@@ -25,6 +28,7 @@ authController.get(
 
 authController.post(
   routes.AUTH_LOGIN,
+  middleware.validation.validate(UserModel),
   middleware.auth.authenticate,
   functions.helpers.asyncWrapper(async (req, res, next) => {
     res.send(`Log In successful`);

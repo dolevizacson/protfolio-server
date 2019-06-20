@@ -27,6 +27,7 @@ module.exports = {
   AUTH: `${appRoot}/auth/controllers/auth-controller`,
   AUTH_SERVICE: `${appRoot}/auth/services/auth-service`,
   USER_MODEL: `${appRoot}/auth/models/user-model`,
+  USER_MODEL_VALIDATION: `${appRoot}/auth/validation/user-model-validation`,
 
   //skills
   SKILLS: `${appRoot}/skills/controllers/skills-controller`,

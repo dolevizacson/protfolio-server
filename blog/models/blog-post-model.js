@@ -28,9 +28,9 @@ const paragraphSchema = new Schema({
 
 const blogPostSchema = new Schema(
   {
-    active: { type: Boolean, default: true },
+    active: { type: Number, default: 1 },
     header: { type: String, required: true },
-    date: { type: Date, default: Date.now() },
+    summery: { type: String, required: true },
     paragraph: {
       type: [paragraphSchema],
       validate: paragraphArray =>
@@ -39,14 +39,11 @@ const blogPostSchema = new Schema(
 
     footer: String,
   },
-  { collection: modelName }
+  {
+    collection: modelName,
+    timestamps: { createdAt: 'date', updatedAt: 'update' },
+  }
 );
-
-blogPostSchema.methods.toJSON = function() {
-  let returnObject = this.toObject();
-  delete returnObject.active;
-  return returnObject;
-};
 
 // validation
 blogPostSchema.static(joiModelValidation, function() {
@@ -55,7 +52,6 @@ blogPostSchema.static(joiModelValidation, function() {
       [scopes.blogPost.DEFAULT]:
         blogPostModelValidation.defaultValidationSchema,
       [scopes.blogPost.UPDATE]: blogPostModelValidation.updateValidationSchema,
-      [scopes.blogPost.TOGGLE]: blogPostModelValidation.toggleValidationSchema,
     },
   };
 });

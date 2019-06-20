@@ -20,6 +20,7 @@ mongoInit();
 const skills = require(files.SKILLS);
 const auth = require(files.AUTH);
 const blog = require(files.BLOG);
+const workingOn = require(files.WORKING_ON);
 
 process.on('uncaughtException', function(err) {
   //mailer logic to report on problems with the app
@@ -33,6 +34,7 @@ middleware.addMiddleware(app);
 app.use(routes.AUTH, auth);
 app.use(routes.SKILLS, skills);
 app.use(routes.BLOG, blog);
+app.use(routes.WORKING_ON, workingOn);
 
 // default route handler
 app.get('*', (req, res, next) => {

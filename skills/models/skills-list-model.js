@@ -21,21 +21,25 @@ const { Schema } = mongoose;
 const modelName = 'skillsList';
 
 const stackSchema = new Schema({
-  language: String,
+  language: { type: String, required: true },
   longData: [
     {
       type: String,
+      validate: paragraphArray =>
+        paragraphArray == null || paragraphArray.length > 0,
     },
   ],
 });
 
 const skillsListSchema = new Schema(
   {
-    topic: String,
-    image: String,
+    topic: { type: String, required: true },
+    image: { type: String, required: true },
     stack: [
       {
         type: stackSchema,
+        validate: paragraphArray =>
+          paragraphArray == null || paragraphArray.length > 0,
       },
     ],
   },

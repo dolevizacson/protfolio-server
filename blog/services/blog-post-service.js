@@ -16,6 +16,10 @@ module.exports = class BlogPostService {
     if (!blogPosts) {
       throw new NotFoundInDatabaseError('No posts in database');
     } else {
+      blogPosts.map(blogPost => {
+        delete blogPost.active;
+        return blogPost;
+      });
       return blogPosts;
     }
   }
@@ -43,6 +47,9 @@ module.exports = class BlogPostService {
   }
 
   async update(id, blogPost) {
+    if (blogPost.update) {
+      delete blogPost.update;
+    }
     const updatedBlogPost = await BlogPostModel.findOneAndUpdate(
       { _id: id, active: true },
       blogPost,
@@ -55,10 +62,14 @@ module.exports = class BlogPostService {
     }
   }
 
-  async toggle(id, state) {
+  async toggle(id) {
     const toggledBlogPost = await BlogPostModel.findOneAndUpdate(
       { _id: id },
-      { active: state },
+      {
+        $bit: {
+          active: { xor: 1 },
+        },
+      },
       { new: true }
     );
     if (!toggledBlogPost) {

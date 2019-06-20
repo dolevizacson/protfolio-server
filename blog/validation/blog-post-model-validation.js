@@ -13,6 +13,7 @@ const Joi = modules.JOI;
 module.exports = {
   defaultValidationSchema: Joi.object().keys({
     header: Joi.string().required(),
+    summery: Joi.string().required(),
     paragraph: Joi.array()
       .items(
         Joi.object().keys({
@@ -27,7 +28,9 @@ module.exports = {
   updateValidationSchema: Joi.object().keys({
     _id: Joi.string().required(),
     header: Joi.string().required(),
-    date: Joi.date().required(),
+    summery: Joi.string().required(),
+    date: Joi.date(),
+    update: Joi.date(),
     paragraph: Joi.array()
       .items(
         Joi.object().keys({
@@ -38,9 +41,5 @@ module.exports = {
       )
       .min(1),
     footer: Joi.string(),
-  }),
-
-  toggleValidationSchema: Joi.object().keys({
-    state: Joi.boolean().required(),
   }),
 };

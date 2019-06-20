@@ -6,9 +6,12 @@ module.exports = {
       blogPost: {
         DEFAULT: 'default',
         UPDATE: 'update',
-        TOGGLE: 'toggle',
       },
       skillsList: {
+        DEFAULT: 'default',
+        UPDATE: 'update',
+      },
+      workingOnTask: {
         DEFAULT: 'default',
         UPDATE: 'update',
       },

@@ -82,11 +82,9 @@ blogController.put(
 blogController.patch(
   routes.MODIFY_BLOG_POST,
   middleware.auth.isLoggedIn,
-  middleware.validation.validate(BlogPostModel, scopes.blogPost.TOGGLE),
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    const { state } = req.body;
-    const blogPost = await blogPostService.toggle(id, state);
+    const blogPost = await blogPostService.toggle(id);
     res.send(blogPost);
   })
 );

@@ -14,7 +14,7 @@ const httpStatus = modules.HTTP_STATUS;
 //files
 const middleware = require(files.MIDDLEWARE);
 const WorkingOnTaskService = require(files.WORKING_ON_TASK_SERVICE);
-const workingOnTaskModel = require(files.SKILLS_LIST_MODEL);
+const workingOnTaskModel = require(files.WORKING_ON_TASK_MODEL);
 
 // constants
 const { scopes } = constants.validation;
@@ -52,7 +52,10 @@ workingOnController.get(
 workingOnController.post(
   routes.CREATE_TASK,
   middleware.auth.isLoggedIn,
-  //middleware.validation.validate(SkillsListModel, scopes.skillsList.DEFAULT),
+  middleware.validation.validate(
+    WorkingOnTaskModel,
+    scopes.workingOnTask.DEFAULT
+  ),
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const task = await workingOnTaskService.create(req.body);
     res.status(httpStatus.CREATED).send(task);
@@ -63,7 +66,10 @@ workingOnController.post(
 workingOnController.put(
   routes.UPDATE_TASK,
   middleware.auth.isLoggedIn,
-  //middleware.validation.validate(SkillsListModel, scopes.skillsList.UPDATE),
+  middleware.validation.validate(
+    WorkingOnTaskModel,
+    scopes.workingOnTask.UPDATE
+  ),
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
     const task = await workingOnTaskService.update(id, req.body);
@@ -77,8 +83,7 @@ workingOnController.patch(
   middleware.auth.isLoggedIn,
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    const { state } = req.body;
-    const task = workingOnTaskService.toggle(id, state);
+    const task = await workingOnTaskService.toggle(id);
     res.send(task);
   })
 );
@@ -94,4 +99,4 @@ workingOnController.delete(
   })
 );
 
-module.exports = skillsController;
+module.exports = workingOnController;
