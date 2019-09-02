@@ -22,7 +22,11 @@ module.exports = {
         })
       )
       .min(1),
-    footer: Joi.string(),
+    conclusion: Joi.object().keys({
+      header: Joi.string(),
+      content: Joi.string().required(),
+    }),
+    conclusionSentence: Joi.string(),
   }),
 
   updateValidationSchema: Joi.object().keys({
@@ -40,6 +44,10 @@ module.exports = {
         })
       )
       .min(1),
-    footer: Joi.string(),
+    conclusion: Joi.object().keys({
+      header: Joi.string(),
+      content: Joi.string().required(),
+    }),
+    conclusionSentence: Joi.string(),
   }),
 };

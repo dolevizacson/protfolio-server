@@ -31,17 +31,18 @@ const blogPostSchema = new Schema(
     active: { type: Number, default: 1 },
     header: { type: String, required: true },
     summery: { type: String, required: true },
+    conclusion: { type: paragraphSchema },
+    conclusionSentence: String,
     paragraph: {
       type: [paragraphSchema],
       validate: paragraphArray =>
         paragraphArray == null || paragraphArray.length > 0,
     },
-
-    footer: String,
+    date: { type: Date, default: Date.now() },
+    update: { type: Date, default: Date.now() },
   },
   {
     collection: modelName,
-    timestamps: { createdAt: 'date', updatedAt: 'update' },
   }
 );
 
