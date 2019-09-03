@@ -25,7 +25,7 @@ module.exports = {
   DELETE_BLOG_POST: '/posts/:id', // DELETE
 
   // working on
-  WORKING_ON: '/working-on',
+  TASK_LIST: '/tasklist',
   READ_TASKS: '/tasks', // GET
   READ_TASK: '/tasks/:id', // GET
   CREATE_TASK: '/tasks', // POST

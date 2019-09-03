@@ -2,13 +2,13 @@
 const { modules, files, functions, routes } = require('../../env/utils/access');
 
 // files
-const workingOnTaslModel = require(files.WORKING_ON_TASK_MODEL);
+const taskListTaslModel = require(files.TASK_LIST_TASK_MODEL);
 
 // errors
 const NotFoundInDatabase = require(files.NOT_FOUND_IN_DATABASE_ERROR);
 
 const WorkingOnTaslModel = functions.helpers.getMongooseModel(
-  workingOnTaslModel
+  taskListTaslModel
 );
 
 module.exports = class WorkingOnTaskService {

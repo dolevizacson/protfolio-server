@@ -13,90 +13,85 @@ const httpStatus = modules.HTTP_STATUS;
 
 //files
 const middleware = require(files.MIDDLEWARE);
-const WorkingOnTaskService = require(files.WORKING_ON_TASK_SERVICE);
-const workingOnTaskModel = require(files.WORKING_ON_TASK_MODEL);
+const TaskListTaskService = require(files.TASK_LIST_TASK_SERVICE);
+const taskListTaskModel = require(files.TASK_LIST_TASK_MODEL);
 
 // constants
 const { scopes } = constants.validation;
 
 // services
-const workingOnTaskService = new WorkingOnTaskService();
+const taskListTaskService = new TaskListTaskService();
 
 //models
-const WorkingOnTaskModel = functions.helpers.getMongooseModel(
-  workingOnTaskModel
-);
+const TaskListTaskModel = functions.helpers.getMongooseModel(taskListTaskModel);
 
-const workingOnController = express.Router();
+const taskListController = express.Router();
 
-// get working on task list
-workingOnController.get(
+// get task list
+taskListController.get(
   routes.READ_TASKS,
   functions.helpers.asyncWrapper(async (req, res, next) => {
-    const tasks = await workingOnTaskService.readAll();
+    const tasks = await taskListTaskService.readAll();
     res.send(tasks);
   })
 );
 
-// get working on task
-workingOnController.get(
+// get task
+taskListController.get(
   routes.READ_TASK,
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    const task = await workingOnTaskService.readOne(id);
+    const task = await taskListTaskService.readOne(id);
     res.send(task);
   })
 );
 
-// post working on task
-workingOnController.post(
+// post task
+taskListController.post(
   routes.CREATE_TASK,
   middleware.auth.isLoggedIn,
   middleware.validation.validate(
-    WorkingOnTaskModel,
-    scopes.workingOnTask.DEFAULT
+    TaskListTaskModel,
+    scopes.taskListTask.DEFAULT
   ),
   functions.helpers.asyncWrapper(async (req, res, next) => {
-    const task = await workingOnTaskService.create(req.body);
+    const task = await taskListTaskService.create(req.body);
     res.status(httpStatus.CREATED).send(task);
   })
 );
 
-// update working on task
-workingOnController.put(
+// update task
+taskListController.put(
   routes.UPDATE_TASK,
   middleware.auth.isLoggedIn,
-  middleware.validation.validate(
-    WorkingOnTaskModel,
-    scopes.workingOnTask.UPDATE
-  ),
+  middleware.validation.validate(TaskListTaskModel, scopes.taskListTask.UPDATE),
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    const task = await workingOnTaskService.update(id, req.body);
+    const task = await taskListTaskService.update(id, req.body);
     res.send(task);
   })
 );
 
-// toggle working on task
-workingOnController.patch(
+// toggle task
+taskListController.patch(
   routes.MODIFY_TASK,
   middleware.auth.isLoggedIn,
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    const task = await workingOnTaskService.toggle(id);
+    const task = await taskListTaskService.toggle(id);
     res.send(task);
   })
 );
 
-// delete working on task
-workingOnController.delete(
+// delete task
+taskListController.delete(
   routes.DELETE_TASK,
   middleware.auth.isLoggedIn,
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    const task = await workingOnTaskService.deleteOne(id);
+    const task = await taskListTaskService.deleteOne(id);
     res.send(task);
   })
 );
 
-module.exports = workingOnController;
+module.exports = taskListController;

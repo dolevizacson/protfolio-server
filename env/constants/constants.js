@@ -11,7 +11,7 @@ module.exports = {
         DEFAULT: 'default',
         UPDATE: 'update',
       },
-      workingOnTask: {
+      taskListTask: {
         DEFAULT: 'default',
         UPDATE: 'update',
       },

@@ -35,15 +35,15 @@ module.exports = {
   SKILLS_LIST_MODEL: `${appRoot}/skills/models/skills-list-model`,
   SKILLS_LIST_MODEL_VALIDATION: `${appRoot}/skills/validation/skills-list-model-validation`,
 
-  //blog
+  // blog
   BLOG: `${appRoot}/blog/controllers/blog-controller`,
   BLOG_POST_SERVICE: `${appRoot}/blog/services/blog-post-service`,
   BLOG_POST_MODEL: `${appRoot}/blog/models/blog-post-model`,
   BLOG_POST_MODEL_VALIDATION: `${appRoot}/blog/validation/blog-post-model-validation`,
 
-  // working on
-  WORKING_ON: `${appRoot}/working-on/controllers/working-on-controller`,
-  WORKING_ON_TASK_SERVICE: `${appRoot}/working-on/services/working-on-task-service`,
-  WORKING_ON_TASK_MODEL: `${appRoot}/working-on/models/working-on-task-model`,
-  WORKING_ON_TASK_VALIDATION: `${appRoot}/working-on/validation/working-on-task-model-validation`,
+  // task list
+  TASK_LIST: `${appRoot}/task-list/controllers/task-list-controller`,
+  TASK_LIST_TASK_SERVICE: `${appRoot}/task-list/services/task-list-task-service`,
+  TASK_LIST_TASK_MODEL: `${appRoot}/task-list/models/task-list-task-model`,
+  TASK_LIST_TASK_VALIDATION: `${appRoot}/task-list/validation/task-list-task-model-validation`,
 };
