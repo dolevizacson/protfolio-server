@@ -45,6 +45,7 @@ module.exports = {
       )
       .min(1),
     conclusion: Joi.object().keys({
+      _id: Joi.string().required(),
       header: Joi.string(),
       content: Joi.string().required(),
     }),

@@ -13,7 +13,6 @@ const Joi = modules.JOI;
 module.exports = {
   defaultValidationSchema: Joi.object().keys({
     topic: Joi.string().required(),
-    image: Joi.string().required(),
     stack: Joi.array()
       .items(
         Joi.object().keys({
@@ -29,7 +28,6 @@ module.exports = {
   updateValidationSchema: Joi.object().keys({
     _id: Joi.string().required(),
     topic: Joi.string().required(),
-    image: Joi.string().required(),
     stack: Joi.array()
       .items(
         Joi.object().keys({

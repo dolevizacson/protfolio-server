@@ -1,4 +1,11 @@
 module.exports = {
+  // auth
+  AUTH: '/auth',
+  AUTH_LOGOUT: '/logout', // GET
+  AUTH_LOGIN: '/login', // POST
+  AUTH_IS_LOGGED_IN: '/isloggedin', //GET
+  AUTH_REGISTER: '/register', // POST
+
   // skills
   SKILLS: '/skills',
   READ_SKILLS_LIST: '/skillslist', // GET
@@ -6,13 +13,6 @@ module.exports = {
   CREATE_SKILL: '/skillslist', // POST
   UPDATE_SKILL: '/skillslist/:id', // PUT
   DELETE_SKILL: '/skillslist/:id', // DELETE
-
-  // auth
-  AUTH: '/auth',
-  AUTH_LOGOUT: '/logout', // GET
-  AUTH_LOGIN: '/login', // POST
-  AUTH_IS_LOGGED_IN: '/isloggedin', //GET
-  AUTH_REGISTER: '/register', // POST
 
   // blog
   BLOG: '/blog',
@@ -24,12 +24,22 @@ module.exports = {
   MODIFY_BLOG_POST: '/posts/:id', // PATCH
   DELETE_BLOG_POST: '/posts/:id', // DELETE
 
-  // working on
+  // task list
   TASK_LIST: '/tasklist',
-  READ_TASKS: '/tasks', // GET
-  READ_TASK: '/tasks/:id', // GET
-  CREATE_TASK: '/tasks', // POST
-  UPDATE_TASK: '/tasks/:id', // PUT
-  MODIFY_TASK: '/tasks/:id', // PATCH
-  DELETE_TASK: '/tasks/:id', // DELETE
+  READ_TASKS: '/task', // GET
+  READ_TASK: '/task/:id', // GET
+  CREATE_TASK: '/task', // POST
+  UPDATE_TASK: '/task/:id', // PUT
+  MODIFY_TASK: '/task/:id', // PATCH
+  DELETE_TASK: '/task/:id', // DELETE
+
+  // projects
+  PROJECTS: '/projects',
+  READ_PROJECTS: '/project', // GET
+  READ_ALL_PROJECTS: '/project/all', //GET
+  READ_PROJECT: '/project/:id', // GET
+  CREATE_PROJECT: '/project', // POST
+  UPDATE_PROJECT: '/project/:id', // PUT
+  MODIFY_PROJECT: '/project/:id', // PATCH
+  DELETE_PROJECT: '/project/:id', // DELETE
 };

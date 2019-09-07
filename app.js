@@ -17,8 +17,9 @@ const BadEndpointError = require(files.BAD_ENDPOINT_ERROR);
 mongoInit();
 
 // controllers
-const skills = require(files.SKILLS);
 const auth = require(files.AUTH);
+const skills = require(files.SKILLS);
+const projects = require(files.PROJECTS);
 const blog = require(files.BLOG);
 const taskList = require(files.TASK_LIST);
 
@@ -33,6 +34,7 @@ middleware.addMiddleware(app);
 // routes
 app.use(routes.AUTH, auth);
 app.use(routes.SKILLS, skills);
+app.use(routes.PROJECTS, projects);
 app.use(routes.BLOG, blog);
 app.use(routes.TASK_LIST, taskList);
 

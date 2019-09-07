@@ -34,7 +34,7 @@ const stackSchema = new Schema({
 const skillsListSchema = new Schema(
   {
     topic: { type: String, required: true },
-    image: { type: String, required: true },
+    // image
     stack: [
       {
         type: stackSchema,

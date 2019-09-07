@@ -47,12 +47,9 @@ module.exports = class BlogPostService {
   }
 
   async update(id, blogPost) {
-    if (blogPost.update) {
-      delete blogPost.update;
-    }
     const updatedBlogPost = await BlogPostModel.findOneAndUpdate(
       { _id: id, active: true },
-      blogPost,
+      {...blogPost, update: Date.now()},
       { new: true }
     );
     if (!updatedBlogPost) {

@@ -15,6 +15,10 @@ module.exports = {
         DEFAULT: 'default',
         UPDATE: 'update',
       },
+      project: {
+        DEFAULT: 'default',
+        UPDATE: 'update',
+      },
     },
   },
 };
