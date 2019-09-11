@@ -5,14 +5,14 @@ const { modules, files, functions, routes } = require('../../env/utils/access');
 const passport = modules.PASSPORT;
 
 // files
-const userModel = require(files.USER_MODEL);
+const UserModel = require(files.USER_MODEL);
 
 // model
-const UserModel = functions.helpers.getMongooseModel(userModel);
+const userModel = functions.helpers.getMongooseModel(UserModel);
 
 module.exports = class AuthService {
   async register(username, password) {
-    const user = await UserModel.register({ username }, password);
+    const user = await userModel.register({ username }, password);
     return user;
   }
 };

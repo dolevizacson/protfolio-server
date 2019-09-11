@@ -13,7 +13,7 @@ const httpStatus = modules.HTTP_STATUS;
 
 // files
 const middleware = require(files.MIDDLEWARE);
-const projectModel = require(files.PROJECT_MODEL);
+const ProjectModel = require(files.PROJECT_MODEL);
 const ProjectService = require(files.PROJECT_SERVICE);
 
 // constants
@@ -23,7 +23,7 @@ const { scopes } = constants.validation;
 const projectService = new ProjectService();
 
 // models
-const ProjectModel = functions.helpers.getMongooseModel(projectModel);
+const projectModel = functions.helpers.getMongooseModel(ProjectModel);
 
 const projectsController = express.Router();
 
@@ -59,7 +59,7 @@ projectsController.get(
 projectsController.post(
   routes.CREATE_PROJECT,
   middleware.auth.isLoggedIn,
-  middleware.validation.validate(ProjectModel, scopes.project.DEFAULT),
+  middleware.validation.validate(projectModel, scopes.project.DEFAULT),
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const project = await projectService.create(req.body);
     res.status(httpStatus.CREATED).send(project);
@@ -70,7 +70,7 @@ projectsController.post(
 projectsController.put(
   routes.UPDATE_PROJECT,
   middleware.auth.isLoggedIn,
-  middleware.validation.validate(ProjectModel, scopes.project.UPDATE),
+  middleware.validation.validate(projectModel, scopes.project.UPDATE),
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
     const project = await projectService.update(id, req.body);

@@ -2,17 +2,17 @@
 const { modules, files, functions, routes } = require('../../env/utils/access');
 
 // files
-const blogPostModel = require(files.BLOG_POST_MODEL);
+const BlogPostModel = require(files.BLOG_POST_MODEL);
 
 // errors
 const NotFoundInDatabaseError = require(files.NOT_FOUND_IN_DATABASE_ERROR);
 
 // models
-const BlogPostModel = functions.helpers.getMongooseModel(blogPostModel);
+const blogPostModel = functions.helpers.getMongooseModel(BlogPostModel);
 
 module.exports = class BlogPostService {
   async readAllActive() {
-    const blogPosts = await BlogPostModel.find({ active: true });
+    const blogPosts = await blogPostModel.find({ active: true });
     if (!blogPosts) {
       throw new NotFoundInDatabaseError('No posts in database');
     } else {
@@ -25,7 +25,7 @@ module.exports = class BlogPostService {
   }
 
   async readAll() {
-    const blogPosts = await BlogPostModel.find();
+    const blogPosts = await blogPostModel.find();
     if (!blogPosts) {
       throw new NotFoundInDatabaseError('No posts in database');
     } else {
@@ -34,7 +34,7 @@ module.exports = class BlogPostService {
   }
 
   async readOne(id) {
-    const blogPost = await BlogPostModel.findOne({ _id: id, active: true });
+    const blogPost = await blogPostModel.findOne({ _id: id, active: true });
     if (!blogPost) {
       throw new NotFoundInDatabaseError('Post not found in database');
     } else {
@@ -43,13 +43,13 @@ module.exports = class BlogPostService {
   }
 
   async create(blogPost) {
-    return await BlogPostModel.create(blogPost);
+    return await blogPostModel.create(blogPost);
   }
 
   async update(id, blogPost) {
-    const updatedBlogPost = await BlogPostModel.findOneAndUpdate(
+    const updatedBlogPost = await blogPostModel.findOneAndUpdate(
       { _id: id, active: true },
-      {...blogPost, update: Date.now()},
+      { ...blogPost, update: Date.now() },
       { new: true }
     );
     if (!updatedBlogPost) {
@@ -60,7 +60,7 @@ module.exports = class BlogPostService {
   }
 
   async toggle(id) {
-    const toggledBlogPost = await BlogPostModel.findOneAndUpdate(
+    const toggledBlogPost = await blogPostModel.findOneAndUpdate(
       { _id: id },
       {
         $bit: {
@@ -77,7 +77,7 @@ module.exports = class BlogPostService {
   }
 
   async deleteOne(id) {
-    const deletedBlogPost = await BlogPostModel.findOneAndDelete({ _id: id });
+    const deletedBlogPost = await blogPostModel.findOneAndDelete({ _id: id });
     if (!deletedBlogPost) {
       throw new NotFoundInDatabaseError('Post not found in database');
     } else {

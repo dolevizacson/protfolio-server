@@ -14,7 +14,7 @@ const httpStatus = modules.HTTP_STATUS;
 //files
 const middleware = require(files.MIDDLEWARE);
 const SkillsContentService = require(files.SKILLS_CONTENT_SERVICE);
-const skillsListModel = require(files.SKILLS_LIST_MODEL);
+const SkillsListModel = require(files.SKILLS_LIST_MODEL);
 
 // constants
 const { scopes } = constants.validation;
@@ -23,7 +23,7 @@ const { scopes } = constants.validation;
 const skillsContentService = new SkillsContentService();
 
 //models
-const SkillsListModel = functions.helpers.getMongooseModel(skillsListModel);
+const skillsListModel = functions.helpers.getMongooseModel(SkillsListModel);
 
 const skillsController = express.Router();
 
@@ -50,7 +50,7 @@ skillsController.get(
 skillsController.post(
   routes.CREATE_SKILL,
   middleware.auth.isLoggedIn,
-  middleware.validation.validate(SkillsListModel, scopes.skillsList.DEFAULT),
+  middleware.validation.validate(skillsListModel, scopes.skillsList.DEFAULT),
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const skill = await skillsContentService.create(req.body);
     res.status(httpStatus.CREATED).send(skill);
@@ -61,7 +61,7 @@ skillsController.post(
 skillsController.put(
   routes.UPDATE_SKILL,
   middleware.auth.isLoggedIn,
-  middleware.validation.validate(SkillsListModel, scopes.skillsList.UPDATE),
+  middleware.validation.validate(skillsListModel, scopes.skillsList.UPDATE),
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
     const skill = await skillsContentService.update(id, req.body);

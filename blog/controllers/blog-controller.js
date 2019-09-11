@@ -13,7 +13,7 @@ const httpStatus = modules.HTTP_STATUS;
 
 // files
 const middleware = require(files.MIDDLEWARE);
-const blogPostModel = require(files.BLOG_POST_MODEL);
+const BlogPostModel = require(files.BLOG_POST_MODEL);
 const BlogPostService = require(files.BLOG_POST_SERVICE);
 
 // constants
@@ -23,7 +23,7 @@ const { scopes } = constants.validation;
 const blogPostService = new BlogPostService();
 
 // models
-const BlogPostModel = functions.helpers.getMongooseModel(blogPostModel);
+const blogPostModel = functions.helpers.getMongooseModel(BlogPostModel);
 
 const blogController = express.Router();
 
@@ -59,7 +59,7 @@ blogController.get(
 blogController.post(
   routes.CREATE_BLOG_POST,
   middleware.auth.isLoggedIn,
-  middleware.validation.validate(BlogPostModel, scopes.blogPost.DEFAULT),
+  middleware.validation.validate(blogPostModel, scopes.blogPost.DEFAULT),
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const blogPost = await blogPostService.create(req.body);
     res.status(httpStatus.CREATED).send(blogPost);
@@ -70,7 +70,7 @@ blogController.post(
 blogController.put(
   routes.UPDATE_BLOG_POST,
   middleware.auth.isLoggedIn,
-  middleware.validation.validate(BlogPostModel, scopes.blogPost.UPDATE),
+  middleware.validation.validate(blogPostModel, scopes.blogPost.UPDATE),
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
     const blogPost = await blogPostService.update(id, req.body);

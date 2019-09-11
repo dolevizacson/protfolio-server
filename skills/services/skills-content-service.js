@@ -2,16 +2,16 @@
 const { modules, files, functions, routes } = require('../../env/utils/access');
 
 // files
-const skillsListModel = require(files.SKILLS_LIST_MODEL);
+const SkillsListModel = require(files.SKILLS_LIST_MODEL);
 
 // errors
 const NotFoundInDatabase = require(files.NOT_FOUND_IN_DATABASE_ERROR);
 
-const SkillsListModel = functions.helpers.getMongooseModel(skillsListModel);
+const skillsListModel = functions.helpers.getMongooseModel(SkillsListModel);
 
 module.exports = class SkillsContentService {
   async readAll() {
-    const skillsList = await SkillsListModel.find();
+    const skillsList = await skillsListModel.find();
     if (!skillsList) {
       throw new NotFoundInDatabase('Skills list not found in database');
     } else {
@@ -20,7 +20,7 @@ module.exports = class SkillsContentService {
   }
 
   async readOne(id) {
-    const skill = await SkillsListModel.findOne({ _id: id });
+    const skill = await skillsListModel.findOne({ _id: id });
     if (!skill) {
       throw new NotFoundInDatabase('Skill not found in database');
     } else {
@@ -29,11 +29,11 @@ module.exports = class SkillsContentService {
   }
 
   async create(skill) {
-    return await SkillsListModel.create(skill);
+    return await skillsListModel.create(skill);
   }
 
   async update(id, skill) {
-    const updatedSkill = await SkillsListModel.findOneAndUpdate(
+    const updatedSkill = await skillsListModel.findOneAndUpdate(
       { _id: id },
       skill,
       { new: true }
@@ -46,7 +46,7 @@ module.exports = class SkillsContentService {
   }
 
   async deleteOne(id) {
-    const deletedSkill = await SkillsListModel.findOneAndDelete({
+    const deletedSkill = await skillsListModel.findOneAndDelete({
       _id: id,
     });
     if (!deletedSkill) {

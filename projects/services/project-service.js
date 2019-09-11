@@ -2,17 +2,17 @@
 const { modules, files, functions, routes } = require('../../env/utils/access');
 
 // files
-const projectModel = require(files.PROJECT_MODEL);
+const ProjectModel = require(files.PROJECT_MODEL);
 
 // errors
 const NotFoundInDatabaseError = require(files.NOT_FOUND_IN_DATABASE_ERROR);
 
 // models
-const ProjectModel = functions.helpers.getMongooseModel(projectModel);
+const projectModel = functions.helpers.getMongooseModel(ProjectModel);
 
 module.exports = class ProjectsService {
   async readAllActive() {
-    const projects = await ProjectModel.find({ active: true });
+    const projects = await projectModel.find({ active: true });
     if (!projects) {
       throw new NotFoundInDatabaseError('No projects in database');
     } else {
@@ -25,7 +25,7 @@ module.exports = class ProjectsService {
   }
 
   async readAll() {
-    const projects = await ProjectModel.find();
+    const projects = await projectModel.find();
     if (!projects) {
       throw new NotFoundInDatabaseError('No projects in database');
     } else {
@@ -34,7 +34,7 @@ module.exports = class ProjectsService {
   }
 
   async readOne(id) {
-    const project = await ProjectModel.findOne({ _id: id, active: true });
+    const project = await projectModel.findOne({ _id: id, active: true });
     if (!project) {
       throw new NotFoundInDatabaseError('Project not found in database');
     } else {
@@ -43,11 +43,11 @@ module.exports = class ProjectsService {
   }
 
   async create(project) {
-    return await ProjectModel.create(project);
+    return await projectModel.create(project);
   }
 
   async update(id, blogPost) {
-    const updatedProject = await ProjectModel.findOneAndUpdate(
+    const updatedProject = await projectModel.findOneAndUpdate(
       { _id: id, active: true },
       { ...blogPost, update: Date.now() },
       { new: true }
@@ -60,7 +60,7 @@ module.exports = class ProjectsService {
   }
 
   async toggle(id) {
-    const toggledProject = await ProjectModel.findOneAndUpdate(
+    const toggledProject = await projectModel.findOneAndUpdate(
       { _id: id },
       {
         $bit: {
@@ -77,7 +77,7 @@ module.exports = class ProjectsService {
   }
 
   async deleteOne(id) {
-    const deletedProject = await ProjectModel.findOneAndDelete({ _id: id });
+    const deletedProject = await projectModel.findOneAndDelete({ _id: id });
     if (!deletedProject) {
       throw new NotFoundInDatabaseError('Project not found in database');
     } else {

@@ -14,7 +14,7 @@ const httpStatus = modules.HTTP_STATUS;
 //files
 const middleware = require(files.MIDDLEWARE);
 const TaskListTaskService = require(files.TASK_LIST_TASK_SERVICE);
-const taskListTaskModel = require(files.TASK_LIST_TASK_MODEL);
+const TaskListTaskModel = require(files.TASK_LIST_TASK_MODEL);
 
 // constants
 const { scopes } = constants.validation;
@@ -23,7 +23,7 @@ const { scopes } = constants.validation;
 const taskListTaskService = new TaskListTaskService();
 
 //models
-const TaskListTaskModel = functions.helpers.getMongooseModel(taskListTaskModel);
+const taskListTaskModel = functions.helpers.getMongooseModel(TaskListTaskModel);
 
 const taskListController = express.Router();
 
@@ -51,7 +51,7 @@ taskListController.post(
   routes.CREATE_TASK,
   middleware.auth.isLoggedIn,
   middleware.validation.validate(
-    TaskListTaskModel,
+    taskListTaskModel,
     scopes.taskListTask.DEFAULT
   ),
   functions.helpers.asyncWrapper(async (req, res, next) => {
@@ -64,7 +64,7 @@ taskListController.post(
 taskListController.put(
   routes.UPDATE_TASK,
   middleware.auth.isLoggedIn,
-  middleware.validation.validate(TaskListTaskModel, scopes.taskListTask.UPDATE),
+  middleware.validation.validate(taskListTaskModel, scopes.taskListTask.UPDATE),
   functions.helpers.asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
     const task = await taskListTaskService.update(id, req.body);
