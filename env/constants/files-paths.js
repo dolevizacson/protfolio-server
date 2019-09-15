@@ -15,6 +15,10 @@ module.exports = {
   SESSIONS: `${appRoot}/env/sessions/sessions-settings`,
   VALIDATION_MIDDLEWARE: `${appRoot}/env/middleware/validation-middleware`,
   WINSTON: `${appRoot}/env/loggers/winston`,
+  CLASSES: `${appRoot}/env/classes/classes`,
+
+  // general classes
+  BD_CRUD: `${appRoot}/env/classes/DBcrud`,
 
   // errors
   NOT_FOUND_IN_DATABASE_ERROR: `${appRoot}/env/errors/not-found-in-database-error`,

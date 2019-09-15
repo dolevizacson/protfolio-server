@@ -5,6 +5,7 @@ const {
   functions,
   routes,
   constants,
+  classes,
 } = require('../../env/utils/access');
 
 // modules
@@ -19,11 +20,11 @@ const BlogPostService = require(files.BLOG_POST_SERVICE);
 // constants
 const { scopes } = constants.validation;
 
-// services
-const blogPostService = new BlogPostService();
-
 // models
 const blogPostModel = functions.helpers.getMongooseModel(BlogPostModel);
+
+// services
+const blogPostService = new BlogPostService();
 
 const blogController = express.Router();
 
