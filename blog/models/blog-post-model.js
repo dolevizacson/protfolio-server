@@ -31,7 +31,10 @@ const blogPostSchema = new Schema(
     active: { type: Number, default: 1 },
     header: { type: String, required: true },
     summery: { type: String, required: true },
-    conclusion: { type: paragraphSchema },
+    conclusion: {
+      header: String,
+      content: String,
+    },
     conclusionSentence: String,
     paragraph: {
       type: [paragraphSchema],

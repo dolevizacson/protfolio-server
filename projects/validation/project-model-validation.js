@@ -14,7 +14,7 @@ module.exports = {
   defaultValidationSchema: Joi.object().keys({
     header: Joi.string().required(),
     summery: Joi.string().required(),
-    description: Joi.string(),
+    description: Joi.string().allow(''),
     technologies: Joi.array()
       .items(Joi.string())
       .min(1),
@@ -25,7 +25,7 @@ module.exports = {
     _id: Joi.string().required(),
     header: Joi.string().required(),
     summery: Joi.string().required(),
-    description: Joi.string(),
+    description: Joi.string().allow(''),
     technologies: Joi.array()
       .items(Joi.string())
       .min(1),

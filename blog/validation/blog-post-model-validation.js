@@ -17,16 +17,16 @@ module.exports = {
     paragraph: Joi.array()
       .items(
         Joi.object().keys({
-          header: Joi.string(),
+          header: Joi.string().allow(''),
           content: Joi.string().required(),
         })
       )
       .min(1),
     conclusion: Joi.object().keys({
-      header: Joi.string(),
-      content: Joi.string().required(),
+      header: Joi.string().allow(''),
+      content: Joi.string().allow(''),
     }),
-    conclusionSentence: Joi.string(),
+    conclusionSentence: Joi.string().allow(''),
   }),
 
   updateValidationSchema: Joi.object().keys({
@@ -39,16 +39,15 @@ module.exports = {
       .items(
         Joi.object().keys({
           _id: Joi.string().required(),
-          header: Joi.string(),
+          header: Joi.string().allow(''),
           content: Joi.string().required(),
         })
       )
       .min(1),
     conclusion: Joi.object().keys({
-      _id: Joi.string().required(),
-      header: Joi.string(),
-      content: Joi.string().required(),
+      header: Joi.string().allow(''),
+      content: Joi.string().allow(''),
     }),
-    conclusionSentence: Joi.string(),
+    conclusionSentence: Joi.string().allow(''),
   }),
 };
