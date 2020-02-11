@@ -32,7 +32,7 @@ module.exports = class DBcrud {
   }
 
   async readOne(id) {
-    const data = await this.model.modelfindOne({ _id: id, active: true });
+    const data = await this.model.findOne({ _id: id });
     if (!data) {
       throw new NotFoundInDatabaseError('Object not found in database');
     } else {
@@ -46,7 +46,7 @@ module.exports = class DBcrud {
 
   async update(id, object) {
     const updatedObject = await this.model.findOneAndUpdate(
-      { _id: id, active: true },
+      { _id: id },
       { ...object, update: Date.now() },
       { new: true }
     );
