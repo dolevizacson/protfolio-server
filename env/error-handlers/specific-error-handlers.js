@@ -11,6 +11,7 @@ const BadEndpointError = require(files.BAD_ENDPOINT_ERROR);
 const UserAuthenticationError = require(files.USER_AUTHENTICATION_ERROR);
 const MissingValidationInformationSchemaError = require(files.MISSING_VALIDATION_INFORMATION_SCHEMA_ERROR);
 const RouteValidationError = require(files.ROUTE_VALIDATION_ERROR);
+const MailNotSentError = require(files.MAIL_NOT_SENT_ERROR);
 
 // error handlers
 const notFoundInDatabaseErrorHandler = (err, req, res, next) => {
@@ -80,6 +81,18 @@ const badEndpointErrorHandler = (err, req, res, next) => {
   next(err);
 };
 
+const MailNotSentErrorHandler = (err, req, res, next) => {
+  if (err instanceof MailNotSentError) {
+    let errorMessage = 'Mail not sent error ';
+
+    if (err.message && err.url) {
+      errorMessage += `: ${err.url} ${err.message}`;
+    }
+    return res.status(httpStatus.NOT_FOUND).send(errorMessage);
+  }
+  next(err);
+};
+
 const DefaultErrorHandler = (err, req, res, next) => {
   console.log(mongoose);
   let errorMessage = 'Internal Server Error';
@@ -93,5 +106,6 @@ module.exports = function specificErrorHandlers(app) {
   app.use(routesValidationErrorHandler);
   app.use(databaseValidationErrorHandler);
   app.use(badEndpointErrorHandler);
+  app.use(MailNotSentErrorHandler);
   app.use(DefaultErrorHandler);
 };
