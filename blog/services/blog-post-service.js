@@ -13,9 +13,6 @@ const BlogPostModel = require(files.BLOG_POST_MODEL);
 // classes
 const DBcrud = classes.DBcrud;
 
-// errors
-const NotFoundInDatabaseError = require(files.NOT_FOUND_IN_DATABASE_ERROR);
-
 // models
 const blogPostModel = functions.helpers.getMongooseModel(BlogPostModel);
 

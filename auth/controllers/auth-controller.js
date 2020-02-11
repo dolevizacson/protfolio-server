@@ -7,9 +7,9 @@ const express = modules.EXPRESS;
 // files
 const middleware = require(files.MIDDLEWARE);
 const UserModel = require(files.USER_MODEL);
+const AuthService = require(files.AUTH_SERVICE);
 
 // services
-const AuthService = require(files.AUTH_SERVICE);
 const authService = new AuthService();
 
 const userModel = functions.helpers.getMongooseModel(UserModel);
