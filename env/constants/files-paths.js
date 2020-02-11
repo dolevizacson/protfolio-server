@@ -9,6 +9,7 @@ module.exports = {
   GENERAL_ERROR_HANDLERS: `${appRoot}/env/error-handlers/general-error-handlers`,
   HELPERS_FUNCTIONS: `${appRoot}/env/functions/helpers-functions`,
   SPECIFIC_ERROR_HANDLERS: `${appRoot}/env/error-handlers/specific-error-handlers`,
+  MAILER_AGENT: `${appRoot}/env/mailer-agent/mailer-agent`,
   MIDDLEWARE: `${appRoot}/env/middleware/middleware`,
   MONGO: `${appRoot}/env/DB/mongo/connection-settings`,
   MORGAN: `${appRoot}/env/loggers/morgan`,
@@ -19,6 +20,7 @@ module.exports = {
 
   // general classes
   BD_CRUD: `${appRoot}/env/classes/DBcrud`,
+  CONTROLLER: `${appRoot}/env/classes/Controller`,
 
   // errors
   NOT_FOUND_IN_DATABASE_ERROR: `${appRoot}/env/errors/not-found-in-database-error`,
@@ -26,6 +28,7 @@ module.exports = {
   USER_AUTHENTICATION_ERROR: `${appRoot}/env/errors/user-authentication-error`,
   ROUTE_VALIDATION_ERROR: `${appRoot}/env/errors/route-validation-error`,
   MISSING_VALIDATION_INFORMATION_SCHEMA_ERROR: `${appRoot}/env/errors/missing-validation-information-schema-error`,
+  MAIL_NOT_SENT_ERROR: `${appRoot}/env/errors/mail-not-sent-error`,
 
   // auth
   AUTH: `${appRoot}/auth/controllers/auth-controller`,
@@ -56,4 +59,9 @@ module.exports = {
   BLOG_POST_SERVICE: `${appRoot}/blog/services/blog-post-service`,
   BLOG_POST_MODEL: `${appRoot}/blog/models/blog-post-model`,
   BLOG_POST_MODEL_VALIDATION: `${appRoot}/blog/validation/blog-post-model-validation`,
+
+  // mailer
+  MAILER: `${appRoot}/mailer/controllers/mailer-controller`,
+  MAILER_SERVICE: `${appRoot}/mailer/services/mailer-service`,
+  MAIL_VALIDATION: `${appRoot}/mailer/validation/mail-validation`,
 };
