@@ -64,4 +64,23 @@ module.exports = {
       );
     };
   },
+  validateWithSchema(validationSchema, scope = scopes.DEFAULT, options = {}) {
+    return (req, res, next) => {
+      const { body } = req;
+      Joi.validate(
+        body,
+        validationSchema,
+        { ...options, allowUnknown: true },
+        (err, value) => {
+          return err === null
+            ? next()
+            : next(
+                new RouteValidationError(
+                  err.message || `Route validation error on `
+                )
+              );
+        }
+      );
+    };
+  },
 };
