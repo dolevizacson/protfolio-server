@@ -12,6 +12,7 @@ const mongoose = modules.MONGOOSE;
 
 // files
 const taskListTaskModelValidation = require(files.TASK_LIST_TASK_VALIDATION);
+const baseSchema = require(files.BASE_SCHEMA);
 
 // constants
 const { scopes, joiModelValidation } = constants.validation;
@@ -20,17 +21,19 @@ const { Schema } = mongoose;
 
 const modelName = 'taskList';
 
-const taskListTaskSchema = new Schema(
-  {
-    header: { type: String, required: true },
-    description: { type: String, required: true },
-    isDone: { type: Number, default: false },
-  },
-  { collection: modelName }
+const baseTaskListTaskSchema = new Schema({
+  header: { type: String, required: true },
+  description: { type: String, required: true },
+  isDone: { type: Number, default: false },
+});
+
+const taskListTaskSchema = functions.helpers.addBaseSchemaFields(
+  baseSchema,
+  baseTaskListTaskSchema
 );
 
 // validation
-taskListTaskSchema.static(joiModelValidation, function() {
+taskListTaskSchema.static(joiModelValidation, function () {
   return {
     scopes: {
       [scopes.taskListTask.DEFAULT]:
@@ -41,6 +44,6 @@ taskListTaskSchema.static(joiModelValidation, function() {
   };
 });
 
-mongoose.model(modelName, taskListTaskSchema);
+mongoose.model(modelName, taskListTaskSchema, modelName);
 
 module.exports = modelName;

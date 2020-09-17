@@ -30,8 +30,8 @@ const taskListController = new Controller(
   taskListTaskValidation
 );
 
-taskListController.getAll();
-taskListController.getOne();
+taskListController.getAllActive();
+taskListController.getOneActive();
 taskListController.post();
 taskListController.update();
 taskListController.toggle();
