@@ -7,8 +7,9 @@ module.exports = {
   AUTH_REGISTER: '/register', // POST
 
   // CRUD
-  READ_ACTIVE: '/', // GET
-  READ_ALL: '/all', // GET
+  READ_ALL_ACTIVE: '/active', // GET
+  READ_ALL: '/', // GET
+  READ_ACTIVE: '/active/:id', // GET
   READ: '/:id', // GET
   CREATE: '/', // POST
   UPDATE: '/:id', // PUT
@@ -27,6 +28,6 @@ module.exports = {
   // projects
   PROJECTS: '/projects',
 
-  // contanct
+  // contact
   CONTACT: '/contact',
 };
