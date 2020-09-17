@@ -12,6 +12,7 @@ const mongoose = modules.MONGOOSE;
 
 // files
 const skillsListModelValidation = require(files.SKILLS_LIST_MODEL_VALIDATION);
+const baseSchema = require(files.BASE_SCHEMA);
 
 // constants
 const { scopes, joiModelValidation } = constants.validation;
@@ -25,29 +26,31 @@ const stackSchema = new Schema({
   longData: [
     {
       type: String,
-      validate: paragraphArray =>
+      validate: (paragraphArray) =>
         paragraphArray == null || paragraphArray.length > 0,
     },
   ],
 });
 
-const skillsListSchema = new Schema(
-  {
-    topic: { type: String, required: true },
-    // image
-    stack: [
-      {
-        type: stackSchema,
-        validate: paragraphArray =>
-          paragraphArray == null || paragraphArray.length > 0,
-      },
-    ],
-  },
-  { collection: modelName }
+const baseSkillsListSchema = new Schema({
+  topic: { type: String, required: true },
+  // image
+  stack: [
+    {
+      type: stackSchema,
+      validate: (paragraphArray) =>
+        paragraphArray == null || paragraphArray.length > 0,
+    },
+  ],
+});
+
+const skillsListSchema = functions.helpers.addBaseSchemaFields(
+  baseSchema,
+  baseSkillsListSchema
 );
 
 // validation
-skillsListSchema.static(joiModelValidation, function() {
+skillsListSchema.static(joiModelValidation, function () {
   return {
     scopes: {
       [scopes.skillsList.DEFAULT]:
@@ -58,6 +61,6 @@ skillsListSchema.static(joiModelValidation, function() {
   };
 });
 
-mongoose.model(modelName, skillsListSchema);
+mongoose.model(modelName, skillsListSchema, modelName);
 
 module.exports = modelName;

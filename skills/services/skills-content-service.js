@@ -22,26 +22,4 @@ module.exports = class SkillsContentService extends DBcrud {
   constructor() {
     super(skillsListModel);
   }
-
-  async readOne(id) {
-    const skill = await skillsListModel.findOne({ _id: id });
-    if (!skill) {
-      throw new NotFoundInDatabaseError('Skill not found in database');
-    } else {
-      return skill;
-    }
-  }
-
-  async update(id, skill) {
-    const updatedSkill = await skillsListModel.findOneAndUpdate(
-      { _id: id },
-      skill,
-      { new: true }
-    );
-    if (!updatedSkill) {
-      throw new NotFoundInDatabaseError('Skill not found in database');
-    } else {
-      return updatedSkill;
-    }
-  }
 };

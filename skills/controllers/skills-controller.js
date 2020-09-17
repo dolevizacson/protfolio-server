@@ -30,8 +30,8 @@ const skillsController = new Controller(
   skillsListValidation
 );
 
-skillsController.getAll();
-skillsController.getOne();
+skillsController.getAllActive();
+skillsController.getOneActive();
 skillsController.post();
 skillsController.update();
 skillsController.delete();
