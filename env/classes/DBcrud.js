@@ -10,22 +10,30 @@ module.exports = class DBcrud {
   }
 
   async readAllActive() {
-    const data = await this.model.find({ active: true });
-    if (!data) {
+    const data = await this.model.find({ active: true }, { active: 0 });
+    if (!data.length) {
       throw new NotFoundInDatabaseError('No objects in database');
     } else {
-      data.map(dataObject => {
-        delete dataObject.active;
-        return dataObject;
-      });
       return data;
     }
   }
 
   async readAll() {
-    const data = await this.model.find();
-    if (!data) {
+    const data = await this.model.find({});
+    if (!data.length) {
       throw new NotFoundInDatabaseError('No objects in database');
+    } else {
+      return data;
+    }
+  }
+
+  async readOneActive(id) {
+    const data = await this.model.findOne(
+      { _id: id, active: true },
+      { active: 0 }
+    );
+    if (!data) {
+      throw new NotFoundInDatabaseError('Object not found in database');
     } else {
       return data;
     }
