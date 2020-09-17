@@ -13,6 +13,10 @@ const helpers = {
   getMongooseModel(modelName) {
     return mongoose.model(modelName);
   },
+  addBaseSchemaFields(baseSchema, schema) {
+    newSchema = baseSchema.clone();
+    return newSchema.add(schema);
+  },
 };
 
 module.exports = helpers;
