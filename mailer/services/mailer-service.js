@@ -21,11 +21,11 @@ module.exports = class MailerService {
         ...mail,
         to: process.env.CONTACT_EMAIL,
       });
+      if (response.rejected.length > 0) {
+        throw new MailNotSentError('Mail rejected error');
+      }
     } catch (error) {
       throw new MailNotSentError('SMTP server error');
-    }
-    if (response.rejected.length > 0) {
-      throw new MailNotSentError('Mail rejected error');
     }
   }
 };
