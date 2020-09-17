@@ -64,4 +64,7 @@ module.exports = {
   MAILER: `${appRoot}/mailer/controllers/mailer-controller`,
   MAILER_SERVICE: `${appRoot}/mailer/services/mailer-service`,
   MAIL_VALIDATION: `${appRoot}/mailer/validation/mail-validation`,
+
+  // general DB schemas
+  BASE_SCHEMA: `${appRoot}/env/general-DB-schemas/baseSchema`,
 };
