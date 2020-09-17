@@ -28,7 +28,7 @@ const blog = require(files.BLOG);
 const taskList = require(files.TASK_LIST);
 const mailer = require(files.MAILER);
 
-process.on('uncaughtException', function(err) {
+process.on('uncaughtException', function (err) {
   //mailer logic to report on problems with the app
 });
 
