@@ -7,6 +7,7 @@ const mongoose = modules.MONGOOSE;
 module.exports = functions.helpers.asyncWrapper(async (req, res, next) => {
   await mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
     useFindAndModify: false,
     useCreateIndex: true,
   });
