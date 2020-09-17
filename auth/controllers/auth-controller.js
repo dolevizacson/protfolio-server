@@ -28,7 +28,7 @@ authController.get(
 
 authController.post(
   routes.AUTH_LOGIN,
-  middleware.validation.validate(userModel),
+  middleware.validation.validateWithModel(userModel),
   middleware.auth.authenticate,
   functions.helpers.asyncWrapper(async (req, res, next) => {
     res.send(`Log In successful`);
