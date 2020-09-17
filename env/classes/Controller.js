@@ -24,10 +24,10 @@ module.exports = class Controller {
     return this.router;
   }
 
-  // get active
-  getActive() {
+  // get all active
+  getAllActive() {
     this.router.get(
-      routes.READ_ACTIVE,
+      routes.READ_ALL_ACTIVE,
       functions.helpers.asyncWrapper(async (req, res, next) => {
         const dataList = await this.service.readAllActive();
         res.send(dataList);
@@ -39,9 +39,23 @@ module.exports = class Controller {
   getAll() {
     this.router.get(
       routes.READ_ALL,
+      this.middleware.auth.isLoggedIn,
       functions.helpers.asyncWrapper(async (req, res, next) => {
         const dataList = await this.service.readAll();
         res.send(dataList);
+      })
+    );
+  }
+
+  // get one active
+  getOneActive() {
+    this.router.get(
+      routes.READ_ACTIVE,
+      this.middleware.auth.isLoggedIn,
+      functions.helpers.asyncWrapper(async (req, res, next) => {
+        const { id } = req.params;
+        const data = await this.service.readOneActive(id);
+        res.send(data);
       })
     );
   }
@@ -63,7 +77,7 @@ module.exports = class Controller {
     this.router.post(
       routes.CREATE,
       this.middleware.auth.isLoggedIn,
-      this.middleware.validation.validate(
+      this.middleware.validation.validateWithModel(
         this.model,
         this.validationScope.DEFAULT
       ),
@@ -79,7 +93,7 @@ module.exports = class Controller {
     this.router.put(
       routes.UPDATE,
       this.middleware.auth.isLoggedIn,
-      this.middleware.validation.validate(
+      this.middleware.validation.validateWithModel(
         this.model,
         this.validationScope.UPDATE
       ),
