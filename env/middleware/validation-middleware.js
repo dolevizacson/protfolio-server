@@ -39,7 +39,7 @@ const getValidationSchema = (model, scope) => {
 };
 
 module.exports = {
-  validate(model, scope = scopes.DEFAULT, options = {}) {
+  validateWithModel(model, scope = scopes.DEFAULT, options = {}) {
     return (req, res, next) => {
       const { body } = req;
       let validationSchema;
