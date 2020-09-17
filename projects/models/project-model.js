@@ -12,6 +12,7 @@ const mongoose = modules.MONGOOSE;
 
 // files
 const projectModelValidation = require(files.PROJECT_MODEL_VALIDATION);
+const baseSchema = require(files.BASE_SCHEMA);
 
 // constants
 const { scopes, joiModelValidation } = constants.validation;
@@ -20,20 +21,22 @@ const { Schema } = mongoose;
 
 const modelName = 'project';
 
-const projectSchema = new Schema(
+const baseProjectSchema = new Schema(
   {
-    active: { type: Number, default: 1 },
     header: { type: String, required: true },
     summery: { type: String, required: true },
     description: String,
     technologies: {
       type: [String],
-      validate: technologiesArray =>
+      validate: (technologiesArray) =>
         technologiesArray == null || technologiesArray.length > 0,
     },
-    links: [String],
-    date: { type: Date, default: Date.now() },
-    update: { type: Date, default: Date.now() },
+    links: [
+      {
+        name: { type: String, required: true },
+        url: { type: String, required: true },
+      },
+    ],
     // image array
   },
   {
@@ -41,8 +44,13 @@ const projectSchema = new Schema(
   }
 );
 
+const projectSchema = functions.helpers.addBaseSchemaFields(
+  baseSchema,
+  baseProjectSchema
+);
+
 // validation
-projectSchema.static(joiModelValidation, function() {
+projectSchema.static(joiModelValidation, function () {
   return {
     scopes: {
       [scopes.project.DEFAULT]: projectModelValidation.defaultValidationSchema,
@@ -51,6 +59,6 @@ projectSchema.static(joiModelValidation, function() {
   };
 });
 
-mongoose.model(modelName, projectSchema);
+mongoose.model(modelName, projectSchema, modelName);
 
 module.exports = modelName;

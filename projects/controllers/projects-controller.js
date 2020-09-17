@@ -30,8 +30,9 @@ const projectsController = new Controller(
   projectValidation
 );
 
-projectsController.getActive();
+projectsController.getAllActive();
 projectsController.getAll();
+projectsController.getOneActive();
 projectsController.getOne();
 projectsController.post();
 projectsController.update();
