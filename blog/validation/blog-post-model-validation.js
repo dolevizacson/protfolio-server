@@ -31,10 +31,11 @@ module.exports = {
 
   updateValidationSchema: Joi.object().keys({
     _id: Joi.string().required(),
-    header: Joi.string().required(),
-    summery: Joi.string().required(),
+    active: Joi.number(),
     date: Joi.date(),
     update: Joi.date(),
+    header: Joi.string().required(),
+    summery: Joi.string().required(),
     paragraph: Joi.array()
       .items(
         Joi.object().keys({

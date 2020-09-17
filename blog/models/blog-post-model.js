@@ -12,6 +12,7 @@ const mongoose = modules.MONGOOSE;
 
 // files
 const blogPostModelValidation = require(files.BLOG_POST_MODEL_VALIDATION);
+const baseSchema = require(files.BASE_SCHEMA);
 
 // constants
 const { scopes, joiModelValidation } = constants.validation;
@@ -26,31 +27,28 @@ const paragraphSchema = new Schema({
   //image
 });
 
-const blogPostSchema = new Schema(
-  {
-    active: { type: Number, default: 1 },
-    header: { type: String, required: true },
-    summery: { type: String, required: true },
-    conclusion: {
-      header: String,
-      content: String,
-    },
-    conclusionSentence: String,
-    paragraph: {
-      type: [paragraphSchema],
-      validate: paragraphArray =>
-        paragraphArray == null || paragraphArray.length > 0,
-    },
-    date: { type: Date, default: Date.now() },
-    update: { type: Date, default: Date.now() },
+const baseBlogPostSchema = new Schema({
+  header: { type: String, required: true },
+  summery: { type: String, required: true },
+  conclusion: {
+    header: String,
+    content: String,
   },
-  {
-    collection: modelName,
-  }
+  conclusionSentence: String,
+  paragraph: {
+    type: [paragraphSchema],
+    validate: (paragraphArray) =>
+      paragraphArray == null || paragraphArray.length > 0,
+  },
+});
+
+const blogPostSchema = functions.helpers.addBaseSchemaFields(
+  baseSchema,
+  baseBlogPostSchema
 );
 
 // validation
-blogPostSchema.static(joiModelValidation, function() {
+blogPostSchema.static(joiModelValidation, function () {
   return {
     scopes: {
       [scopes.blogPost.DEFAULT]:
@@ -60,6 +58,6 @@ blogPostSchema.static(joiModelValidation, function() {
   };
 });
 
-mongoose.model(modelName, blogPostSchema);
+mongoose.model(modelName, blogPostSchema, modelName);
 
 module.exports = modelName;

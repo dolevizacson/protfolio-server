@@ -30,8 +30,9 @@ const blogController = new Controller(
   blogPostValidation
 );
 
-blogController.getActive();
+blogController.getAllActive();
 blogController.getAll();
+blogController.getOneActive();
 blogController.getOne();
 blogController.post();
 blogController.update();
